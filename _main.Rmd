@@ -1,0 +1,42 @@
+---
+title: "Applied Spatial Statistics for Geographers"
+author: "James B. Elsner"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a test"
+---
+
+# Preface
+
+This book compiles the lessons for Applied Spatial Statistics into a book.
+
+<!--chapter:end:index.Rmd-->
+
+
+# RStudio, R, and Getting Started
+
+Placeholder
+
+
+### RStudio's integrated development environment (IDE)
+### Create an HTML file
+## Basic R
+### Functions
+### Data vectors
+#### Variance
+### Vector types
+### Structured data
+### Query data
+## Data frames
+### Another data frame
+### Practice: U.S. tornado database
+## Your turn: Florida precipitation by month
+## More practice: Tornadoes
+## Need additional help? Try swirl
+
+<!--chapter:end:01-Lesson.Rmd-->
+

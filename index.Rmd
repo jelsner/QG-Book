@@ -1,0 +1,37 @@
+---
+title: "Quantitative Geography with R"
+author: "James B. Elsner"
+date: "`r Sys.Date()`"
+site: "bookdown::bookdown_site"
+output:
+  bookdown::gitbook: default
+documentclass: book
+bibliography: ["References.bib"]
+biblio-style: apalike
+link-citations: yes
+---
+
+# Preface {-}
+
+https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html#1_questioning_authority
+
+Timeseries Forecasting
+https://weecology.github.io/MATSS/
+
+Movement
+https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/1365-2656.13116 Navigating through the r packages for movement
+
+Bookdown
+https://bookdown.org/yihui/bookdown/introduction.html
+https://ropensci.org/blog/2020/04/07/bookdown-learnings/
+
+https://evamaerey.github.io/flipbooks/flipbookr/skeleton#1
+https://docs.ropensci.org/stplanr/index.html
+
+For QG next Fall: 
+https://data.library.virginia.edu/getting-started-with-quantile-regression/
+https://easystats.github.io/performance/index.html
+
+Climate datasets in R: 
+https://cran.r-project.org/web/packages/climate/vignettes/getstarted.html
+SOI data: http://www.bom.gov.au/climate/current/soihtm1.shtml
