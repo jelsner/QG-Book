@@ -1,0 +1,106 @@
+# Syllabus {-}
+
+## Contact Information
+
+* Instructor Location: Bellamy Building, Room 323a
+* Lesson Hours: MWF 9:05-9:55 a.m.
+* Student Hours: MWF 10-10:30 a.m.
+
+Email: <jelsner@fsu.edu>
+
+Links to my stuff:
+
+* [Canvas](https://cas.fsu.edu/cas/login)
+* [GitHub](https://github.com/jelsner/)
+* [Twitter](https://twitter.com/JBElsner)
+* [Research Website](http://myweb.fsu.edu/jelsner/_site/)
+
+## Course description
+
+This course is an introduction to the quantitative analysis of geographic data (data analysis for geographers). All course content is hosted by RStudio Cloud. Please open an account at (https://rstudio.cloud). 
+
+Please use this link https://rstudio.cloud/spaces/12733/join?access_code=NuhGFcK71GlGuzoKzAUIe1lqgcMDyOIC7UnnFtNG to join the Spatial Data Analysis workspace on RStudio Cloud.
+
+## Expected learning outcomes
+
+You will describe and demonstrate the principles of data science. You will do this with a grammar for manipulating data and a grammar for making graphs. The grammars are implemented in R using the syntax of tidyverse.
+
+## Materials
+
+* You will need access to the internet and either an iPad, laptop, or desktop computer. 
+* All course materials are available through RStudio Cloud (https://rstudio.cloud/spaces/12733/projects).
+* There is no required textbook. 
+* Much of the material for the course comes from the online book: R for Data Science https://r4ds.had.co.nz/
+* Additional help is available online (e.g., https://tinystats.github.io/teacups-giraffes-and-statistics/index.html)
+
+## Class meetings
+
+- Online: synchronous, interactive
+- Some lectures, lots of learn-by-doing
+- Bring your laptop/iPad to class every day (especially on Fridays)
+
+## Grades
+
+* Grades are solely determined by how well you do on regular homework/classwork assignments. 
+* There are NO quizzes, tests, or exams. 
+* Class attendance is expected but not required. 
+* Late classwork or homework assignments will not be accepted. 
+* Cumulative numerical averages of 90 - 100 (outstanding) are guaranteed at least an A-, 80 - 89 (good) at least a B-, and 70 - 79 (satisfactory) at least a C-, however the exact ranges for letter grades will be determined after all work is complete.
+
+## Academic honor code
+
+http://www.eng.fsu.edu/~peterson/fsuhc.html
+
+## Students With Disabilities Act
+
+Students needing academic accommodation should: (1) register with and provide documentation to the Student Disability Resource Center (https://dos.fsu.edu/sdrc/); (2) bring a letter to me indicating the need for accommodation and what type. This should be done sometime during the first week of classes.
+
+## Diversity & Inclusiveness
+
+Students from all diverse backgrounds and perspectives will be well-served by this course. Student learning needs be addressed both in and out of class, and that the diversity that you bring to this class will be viewed as a resource, strength and benefit. It is my intent to present materials and activities that are respectful of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture. Let me know ways to improve the effectiveness of the course for you personally, or for other students or student groups.
+
+- If you have a name and/or set of pronouns that differ from those that appear in your official FSU records, please let me know.
+- If you feel your performance is being impacted by your experiences outside of class, please don't hesitate to come and talk with me. If you prefer to speak with someone outside of the course, your academic dean is an excellent resource. 
+- I (like many people) am still in the process of learning about diverse perspectives/identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it.
+
+## Syllabus change policy
+
+This syllabus is a guide for the course and is subject to change with advanced notice.
+
+## Schedule (subject to change with notice)
+
+Week | Dates                      | Topic
+-----|----------------------------|-------
+1    | August 26, 28, 30          | RStudio cloud and R
+2    | September 4, 6             | Making a graph
+3    | September 9, 11, 13        | Working with R
+4    | September 16, 18, 20       | Data wrangling
+5    | September 23, 25, 27       | Exploratory data analysis
+6    | September 30, October 2, 4 | Exploratory data analysis
+7    | October 7, 9, 11           | Graphs
+8    | October 14, 16, 18         | Spatial data & Maps
+9    | October 21, 23, 25         | Maps
+10   | October 28, 30, November 1 | Maps
+11   | November 4, 6              | NO CLASS (out of town)
+12   | November 13, 15            | Spatial analysis
+13   | November 18, 20, 22        | Inference
+14   | November 25                | Inference
+15   | December 2, 4, 6           | Regression
+
+I will cover new material on Mondays and Wednesdays. On Fridays you will work on your assignment that is due at 5p.
+
+Assignment | Due Date (no later than 5 pm)
+-----------|---------------
+1          | August 30
+2          | September 6
+3          | September 13
+4          | September 20
+5          | September 27
+6          | October 4
+7          | October 11
+8          | October 18
+9          | October 25
+10         | November 1
+11         | November 15
+12         | November 22
+13         | December 6

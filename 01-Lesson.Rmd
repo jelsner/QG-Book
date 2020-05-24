@@ -1,0 +1,73 @@
+# Lesson 1
+
+* Is it getting hotter in Tallahassee? Get ready for more sweaty.
+* Are hurricanes getting stronger?
+
+Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge. You will learn to do this in a `tidy` way -- more on that later!
+
+## Today
+
+- Start to develop an understanding of what data science is
+- Understand course goals, structure, and expectations
+- Create and modify a data visualization 
+
+## What is this course?
+
+This is a first course on data science for geographers.
+
+**Q - What statistics background does this course assume?**  
+A - None.
+
+**Q - Is this an intro stat course?**  
+A - Statistics and data science are closely related with much overlap. Hence, this course is a great way to get started with statistics. But this course is **not** your typical high school/college statistics course.
+
+**Q - Will we be doing computing?**   
+A - Yes.
+
+**Q - Is this an introduction to computer science course?**  
+A - No, but many themes are shared.
+
+**Q - What computing language will we learn?**  
+A - R.
+
+**Q - Why not language some other language?**  
+A - We can discuss that over coffee.
+
+## Where is this course?
+
+[RStudio Cloud](https://rstudio.cloud)
+
+### Join RStudio Cloud
+
+* Go to [RStudio Cloud](https://rstudio.cloud), and log in.
+* Click on this link https://rstudio.cloud/spaces/12733/join?access_code=NuhGFcK71GlGuzoKzAUIe1lqgcMDyOIC7UnnFtNG to join the Spatial Data Analysis workspace on RStudio Cloud.
+* Once done, place a green sticky note on your laptop. If you have questions, place a pink sticky note.
+
+### Examples
+
+My research:
+
+- [More hots](https://eartharxiv.org/q4y8z/)
+- [Stronger tornadoes](https://eartharxiv.org/wpkt9/)
+
+Others:
+
+- [A year as told by fitbit](http://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/) by Nick Strayer
+- [R-Ladies global tour](http://www.masalmon.eu/2017/10/06/globalrladiestour/) by Maelle Salmon
+- [Text analysis of Trump's tweets confirms he writes only the (angrier) Android half](http://varianceexplained.org/r/trump-tweets/) by David Robinson
+
+### Tallahassee Daily Temperatures
+
+- Log on to RStudio Cloud and click on this course's workspace (Spatial Data Analysis).
+- Make a copy of the project `01_Lesson` and launch it.
+- In the Files pane in the bottom right corner, spot the file called `Tallahassee_Temperatures.Rmd`. Open it, and then click on the "Knit" button.
+- Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
+- Then, change the temperature from `TMAX` to `TMIN`. Make other adjustments accordingly. Knit again. Voila, your first data visualization!
+- Once done, place an green sticky on your desk or laptop. If you have questions, place a pink sticky on your desk or laptop.
+
+### Open the Syllabus project
+
+- Log on to RStudio Cloud and click on this course's workspace (Spatial Data Analysis).
+- Make a copy of the project `00_Syllabus` and launch it.
+- Open the `Syllabus.Rmd` file (lower-right panel), and then click on the "Knit" button.
+- Go back to the file and change your name on top and knit again.
