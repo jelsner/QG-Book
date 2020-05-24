@@ -2,7 +2,6 @@
 
 **"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."** --- Martin Fowler
 
-
 We will use RStudio Cloud (https://rstudio.cloud/) throughout the semester.
 
 ![RStudio Cloud's landing page](figures/RStudioCloudLanding.png)
@@ -53,7 +52,7 @@ Then get RStudio
 
 ## Create an HTML file
 
-Your assignments and class project will be done in an Rmd file.
+Your assignments will be done in an Rmd file.
 
 1. Click on the Assignment project.
 2. Open the corresponding assignment Rmd file.
@@ -148,7 +147,7 @@ var(x)
 
 ### Vector types
 
-Elements in a vector must all have the same type. This type can be numeric, as in counts, character strings, as in
+Elements in a vector must all be of the same type. This type can be numeric as in counts or character strings as in
 ```{r}
 simpsons <- c('Homer', 'Marge', 'Bart', 'Lisa', 'Maggie')
 simpsons

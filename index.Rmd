@@ -2,13 +2,13 @@
 title: "Quantitative Geography with R"
 author: "James B. Elsner"
 date: "`r Sys.Date()`"
-site: "bookdown::bookdown_site"
-output:
-  bookdown::gitbook: default
-documentclass: book
 bibliography: ["References.bib"]
 biblio-style: apalike
 link-citations: yes
+github-repo: jelsner/QG-Book
+site: "bookdown::bookdown_site"
+documentclass: book
+description: "Everything you need (and nothing more) to start a bookdown book."
 ---
 
 # Preface {-}
