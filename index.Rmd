@@ -8,12 +8,12 @@ link-citations: yes
 github-repo: jelsner/QG-Book
 site: "bookdown::bookdown_site"
 documentclass: book
-description: "Everything you need (and nothing more) to start a bookdown book."
 ---
 
 # Preface {-}
 
 For QG next Fall: 
+https://rstudio.cloud/learn/primers
 https://data.library.virginia.edu/getting-started-with-quantile-regression/
 https://easystats.github.io/performance/index.html
 
