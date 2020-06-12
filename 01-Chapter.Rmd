@@ -61,6 +61,10 @@ Your assignments will be done in an Rmd file.
 5. Select the Knit button to generate the HTML.
 6. If there are errors, fix them and re-knit. 
 
+## R Markdown
+
+https://alison.rbind.io/post/2020-05-28-how-i-teach-r-markdown/
+
 ## Basic R
 
 Applied statistics is the analysis and modeling of data. The `c()` function gets small lists of data items into R. The function combines (concatenates) items. Consider for example a set of hypothetical annual land falling hurricane counts over a ten-year period.

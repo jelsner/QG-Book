@@ -1,5 +1,5 @@
 ---
-title: "GEO5146: Quantitative Geography with R"
+title: "GEO5146: Quantitative Geography Using R"
 author: "James B. Elsner"
 date: "`r Sys.Date()`"
 bibliography: ["References.bib"]

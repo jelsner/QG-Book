@@ -1,8 +1,8 @@
 # Lesson
 
-Review: Spatial data analysis: An introduction to spatial data science for geographers. No quizzes or exams. Weekly assignments are due at 5p on Friday (your weekends are free!)
+Review: Quantitative Geography Using R: Spatial data science for geographers. No quizzes or exams. Weekly assignments are due at 5p on Friday (your weekends are free)
 
-Come to class prepared to work on your laptop or iPad. Monday and Wednesday I will present new material. Friday you will work on the assignment. Working together is encouraged. Assignments are made available in RStudio Cloud Thursday night or early Friday morning.
+Come prepared to work on your computer, laptop, or iPad. Monday and Wednesday I will present new material. Friday you will work on the assignment. Working together is encouraged. Assignments are made available in RStudio Cloud Thursday night or early Friday morning.
 
 * Grades are solely determined by how well you do on the assignments. 
 * Late classwork or homework assignments will not be accepted. 
@@ -13,6 +13,8 @@ Come to class prepared to work on your laptop or iPad. Monday and Wednesday I wi
 * Help is available with material comes in https://tinystats.github.io/teacups-giraffes-and-statistics/index.html
 
 ## Navigating RStudio Cloud
+
+![RStudio Cloud's landing page](figures/RStudioCloudLanding.png)
 
 Do this now:
 
@@ -119,13 +121,15 @@ If you keep your notes in this way, you will be able to see the code you wrote, 
 
 This is how we will do everything in this course.
 
+MAYBE SAVE THE MATERIAL BELOW AND INSTEAD START WITH Basic R from 01-Chapter.Rmd.
+
 ## Visualizing data
 
-We begin with visualizing data using **ggplot2**. There are three essential things to learn:
+We begin with learning how to visualizing data. There are three essential things to learn:
 
-1. How to create graphs with a reusable **ggplot2** template
+1. How to create graphs with a reusable template
 2. How to add variables to a graph with aesthetics
-3. How to select the 'type' of your graph with _geoms_
+3. How to select the 'type' of your graph
 
 The following examples are taken from R for Data Science by Hadley Wickham and Garrett Grolemund, published by O’Reilly Media, Inc., 2016, ISBN: 9781491910399. You can purchase the book at https://r4ds.had.co.nz/.
 
@@ -138,20 +142,20 @@ What do you think: Do cars with big engines use more fuel than cars with small e
 * A: Cars with bigger engines use more fuel.
 * B: Cars with bigger engines use less fuel.
 
-You can test your answer with two things: the `mpg` data that comes in **ggplot2** and a plot. The `mpg` object contains observations collected on 38 models of cars by the US Environmental Protection Agency. Among the variables in `mpg` are:
+You can test your answer with two things: the `mpg` data that comes in {ggplot2} and a plot. The `mpg` object contains observations collected on 38 models of cars by the US Environmental Protection Agency. Among the variables in `mpg` are:
 
 * `displ`, a car’s engine size, in liters.
 * `hwy`, a car’s fuel efficiency on the highway, in miles per gallon (mpg).
 
 A car with a low fuel efficiency consumes more fuel than a car with a high fuel efficiency when they travel the same distance.
 
-To see the `mpg` data frame, type `mpg` after you loaded the **ggplot2** package using the `library()` function.
+To see the `mpg` data frame, type `mpg` after you loaded the {ggplot2} package using the `library()` function.
 ```{r}
 library(ggplot2)
 mpg
 ```
 
-The code below uses functions from the **ggplot2** package to plot the relationship between `displ` and `hwy`.
+The code below uses functions from the {ggplot2} package to plot the relationship between `displ` and `hwy`.
 
 Let’s look at the plot and then talk about the code itself. To see the plot, click on the little green triangle in the upper right corner of the gray shaded region.
 ```{r}
