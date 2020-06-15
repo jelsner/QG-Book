@@ -1,0 +1,240 @@
+# Lesson
+
+Last week: Learned how to use RStudio Cloud, how this course is organized, and how I will grade you. You turned in Assignment 1. I graded it then 'moved' it to Your Workspace.
+
+Monday & Wednesday you will make a copy of the Lesson. You can add notes (and code) to your copy. You should change the author to Your Name. At the end of the lesson you can Knit to HTML (or Word if you prefer). Friday you will make a copy of the Assignment. You will work on the assignment and I will grade it after 5p.
+
+In this lesson you will learn how to make a graph. In doing so you will learn a bit about how R works. Assignment 2 due this Friday will ask you to make a graph.
+
+## Your first graph
+
+What do you think: Do cars with big engines use more fuel than cars with small engines?
+
+* A: Cars with bigger engines use more fuel.
+* B: Cars with bigger engines use less fuel.
+
+You can test your answer with two things: the `mpg` data that comes in **ggplot2** and a plot. The `mpg` object contains observations collected on 38 models of cars by the US Environmental Protection Agency. Among the variables in `mpg` are:
+
+* `displ`, a car’s engine size, in liters. Engine size.
+* `hwy`, a car’s fuel efficiency on the highway in units of miles per gallon.
+
+A car with a low fuel efficiency consumes more fuel than a car with a high fuel efficiency when they travel the same distance.
+
+To see the `mpg` data frame, type `mpg` after you loaded the **ggplot2** package using the `library()` function.
+```{r}
+library(ggplot2)
+mpg
+```
+
+Note the syntax and the use of back ticks. To run the code click on the little green triangle in the upper right corner of the gray shaded region. A part of the data is printed in the Console below. 
+
+There are 11 columns (variables) and 234 rows (cars).
+
+The code below uses functions from the **ggplot2** package to plot the relationship between `displ` and `hwy`. Let’s first look at the plot and then talk about the code itself. To render the plot, click on the little green triangle in the upper right corner of the gray shaded region.
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+The graph gets plotted in the lower-right panel under the Plots tab.
+
+Each point on the graph represents a car. Each car has a value for `hwy` and `displ`. The value for `hwy` is plotted on the vertical axis (y axis) and the value for `displ` is plotted on the horizontal axis (x axis).
+
+The graph shows an inverse relationship between engine size (`displ`) and fuel efficiency (`hwy`). Points that have a large value of `displ` have a small value of `hwy` and vice versa.
+
+In other words, cars with big engines use more fuel. If that was your hypothesis, you were right!
+
+Now let’s take a closer look at how we made the plot.
+
+### The code
+
+Here is the code. Notice that it contains three functions: `ggplot()`, `geom_point()`, and `aes()`. You can tell they are functions because they have left and right parentheses. 
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+The first function, `ggplot()`, creates a coordinate system that you can add layers to. The first argument (a thing that goes between the parentheses) of the `ggplot()` function is the dataset to use in the graph.
+
+By itself, `ggplot(data = mpg)` creates an empty graph, but it is not very interesting.
+
+The function `geom_point()` adds a layer of points to the empty plot created by `ggplot()`. As a result, we get a scatterplot.
+
+The function `geom_point()` takes a mapping argument, which defines which variables in your dataset are mapped to which axes in your graph. The mapping argument is always paired with the function `aes()`, which you use to gather together all of the mappings that you want to create.
+
+Here, we want to map the `displ` variable to the x axis (horizontal axis) and the `hwy` variable to the y axis (vertical axis), so we add `x = displ` and `y = hwy` inside of `aes()` (and we separate them with a comma). 
+
+Where will `ggplot()` look for these mapped variables? In the data frame that we passed to the data argument, in this case, `mpg`.
+
+### A graphing workflow
+
+The code above follows the common workflow for making graphs with **ggplot2**. To make a graph, you:
+
+1. Start the graph with `ggplot()`
+2. Add elements to the graph with a `geom_` function
+3. Select variables with the `mapping = aes()` argument
+
+### A graphing template
+
+In fact, you can turn your code into a reusable template for making graphs. To make a graph, replace the bracketed sections in the code below with a data set, a `geom_` function, or a collection of mappings.
+
+Give it a try! Replace the bracketed sections with `mpg`, `geom_boxplot`, and `x = class`, `y = hwy` to make a slightly different graph. Be sure to delete the # symbols before you run the code.
+```{r, eval=FALSE}
+# ggplot(data = <DATA>) + 
+#  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+```
+
+### Common problems
+
+As you start to work with R code, you are likely to run into problems. Don't worry — it happens to everyone. I have been writing R code for decades, and every day I write code that doesn’t work!
+
+Start by comparing the code that you are running to the code in the examples in these notes. R is extremely picky, and a misplaced character can make all the difference. Make sure that every `(` is matched with a `)` and every `"` is paired with another `"`. Also pay attention to capitalization; R is case sensitive.
+
+### location of the `+` sign
+
+One common problem when creating **ggplot2** graphics is to put the `+` in the wrong place: it must come at the end of a line, not the start. In other words, make sure you haven’t accidentally written code like this:
+```{r, eval=FALSE}
+ggplot(data = mpg) 
++ geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+### help
+
+If you’re still stuck, try the help. You can get help about any R function by running `?function_name` in a code chunk, e.g. `?geom_point`. Don’t worry if the help doesn’t seem that helpful — instead skip down to the bottom of the help page and look for a code example that matches what you’re trying to do.
+
+If that doesn’t help, carefully read the error message that appears when you run your (non-working) code. Sometimes the answer will be buried there! But when you’re new to R, you might not yet know how to understand the error message. Another great tool is Google: try googling the error message, as it’s likely someone else has had the same problem, and has gotten help online.
+
+## Things to know about R
+
+You are getting oriented to the language itself (what happens at the console), while learning to take notes in what might seem like an odd format (chunks of code interspersed with plain-text comments), in an IDE (integrated development environment) that that has a many features designed to make your life easier in the long run, but which can be hard to decipher at the beginning. Here are some general points to bear in mind about how R is designed. They might help you get a feel for how the language works.
+
+### Everything has a name
+
+In R, everything you deal with has a name. You refer to things by their names as you examine, use, or modify them. Named entities include variables (like x, or y), data that you have loaded (like my_data), and functions that you use. (More about functions soom.) You will spend a lot of time talking about, creating, referring to, and modifying things with names. 
+
+Things are listed under the Environment tab in the upper right panel of RStudio.
+
+Some names are forbidden. These include reserved words like FALSE and TRUE, core programming words like Inf, for, else, break, function, and words for special entities like NA and NaN. (These last two are codes designating missing data and “Not a Number”, respectively.) You probably won’t use these names by accident, but it’s good do know that they are not allowed.
+
+Some names you should not use, even if they are technically permitted. These are mostly words that are already in use for objects or functions that form part of the core of R. These include the names of basic functions like `q()` or `c()`, common statistical functions like `mean()`, `range()` or `var()`, and built-in mathematical constants like `pi`.
+
+Names in R are case sensitive. The object `my_data` is not the same as the object `My_Data`. When choosing names for things, be concise, consistent, and informative. Follow the style of the tidyverse and name things in lower case, separating words with the underscore character, _, as needed. Do not use spaces when naming things, including variables in your data.
+
+### Everything is an object
+
+Some objects are part of R, some are added via packages, and some are created by you. But almost everything is some kind of object. The code you write will create, manipulate, and use named objects. 
+
+Let’s create a vector of numbers. The command `c()` is a function. It’s short for “combine” or “concatenate”. It will take a sequence of comma-separated things inside the parentheses and join them together into a vector where each element is still individually accessible.
+```{r}
+c(1, 2, 3, 1, 3, 5, 25)
+```
+
+Instead of sending the result to the console, we can instead assign it to an object we create:
+```{r}
+my_numbers <- c(1, 2, 3, 1, 3, 5, 25)
+your_numbers <- c(5, 31, 71, 1, 3, 21, 6)
+```
+
+To see what you made, type the name of the object and hit return:
+```{r}
+my_numbers
+```
+
+Each of our numbers is still there, and can be accessed directly if we want. They are now just part of a new object, a vector, called `my_numbers`.
+
+You create objects by assigning them to names. The assignment operator is `<-`. Think of assignment as the verb “gets”, reading left to right. So, the bit of code above is read as “The object `my_numbers` gets the result of concatenating the following numbers: 1, 2, ...” 
+
+The operator is two separate keys on your keyboard: the `<` key and the `-` (minus) key. When you create objects by assigning things to names, they come into existence in R’s workspace or environment.
+
+### You do things using functions
+
+You do almost everything in R using functions. Think of a function as a special kind of object that can perform actions for you. It produces output based on the input that it receives. Like a good dog, when we want a function to do something for us, we call it. Somewhat less like a dog, it will reliably do what we tell it. 
+
+We give the function some information, it acts on that information, and some results come out the other side. Functions can be recognized by the parentheses at the end of their names. This distinguishes them from other objects, such as single numbers, named vectors, tables of data, and so on.
+
+The parentheses are what allow you to send information to the function. Most functions accept one or more named arguments. A function’s arguments are the things it needs to know in order to do something. They can be some bit of your data (`data = my_numbers`), or specific instructions (`title = "GDP per Capita"`), or an option you want to choose (`smoothing = "splines", show = FALSE`). 
+
+For example, the object `my_numbers` is a numeric vector:
+```{r}
+my_numbers
+```
+
+But the thing we used to create it, `c()`, is a function. It combines the items into a vector composed of the series of comma-separated elements you give it. Similarly, `mean()` is a function that calculates a simple average for a vector of numbers. What happens if we just type `mean()` without any arguments inside the parentheses?
+```{r, eval=FALSE}
+mean()
+```
+
+The error message is terse but informative. The function needs an argument to work, and we haven’t given it one. In this case, ‘x’, the name of another object that `mean()` can perform its calculation on:
+```{r}
+mean(x = my_numbers)
+```
+Or
+```{r}
+mean(x = your_numbers)
+```
+
+While the function arguments have names that are used internally, (here, `x =`), you don’t strictly need to specify the name for the function to work:
+```{r}
+mean(my_numbers)
+```
+
+If you omit the name of the argument, R will just assume you are giving the function what it needs, and in some order. The documentation for a function will tell you what the order of required arguments is for any particular function.
+
+For simple functions that only require one or two arguments, omitting their names is usually not confusing. For more complex functions, you will typically want to use the names of the arguments rather than try to remember what the ordering is.
+
+In general, when providing arguments to a function the syntax is `<argument> = <value>`. If `<value>` is a named object that already exists in your workspace, like a vector of numbers of a table of data, then you provide it unquoted, as in `mean(my_numbers)`. If `<value>` is not an object, a number, or a logical value like TRUE, then you usually put it in quotes, e.g., `labels(x = "X Axis Label")`.
+
+Functions take inputs via their arguments, do something, and return outputs. What the output is depends on what the function does. The `c()` function takes a sequence of comma-separated elements and returns a vector consisting of those same elements. The `mean()` function takes a vector of numbers and returns a single number, their average. 
+
+Functions can return far more than single numbers. The output returned by functions can be a table of data, or a complex object such as the results of a linear model, or the instructions needed to draw a plot. They can even be other functions. For example, the `summary()` function performs a series of calculations on a vector and produces what is in effect a little table with named elements.
+
+A function’s argument names are internal to that function. Say you have created an object in your environment named `x`, for example. A function like `mean()` also has a named argument, `x`, but R will not get confused by this. It will not use your `x` object by mistake.
+
+As we have already seen with `c()` and `mean()`, you can assign the result of a function to an object:
+```{r}
+my_summary <- summary(my_numbers)
+```
+
+When you do this, there’s no output to the console. R just puts the results into the new object, as you instructed. To look inside the object you can type its name and hit return:
+```{r}
+my_summary
+```
+
+### Functions come in packages (libraries)
+
+The code you write will be more or less complex depending on the task you want to accomplish. Families of useful functions are bundled into packages that you can install, load into your R session, and make use of as you work. 
+
+Packages save you from reinventing the wheel. They make it so that you do not, for example, have to figure out how to write code from scratch to draw a shape on screen, or load a data file into memory. 
+
+Packages are also what allow you to build on the efforts of others in order to do your own work. **ggplot** is a package of functions. There are many other such packages and we will make use of several throughout this course, either by loading them with the `library()` function, or “reaching in” to them and pulling a useful function from them directly.
+
+All of the work we will do this semester will involve choosing the right function or functions, and then giving those functions the right instructions through a series of named arguments. Most of the mistakes you will make, and the errors you will fix, will involve having not picked the right function, or having not fed the function the right arguments, or having failed to provide information in a form the function can understand.
+
+For now, just remember that you do things in R by creating and manipulating named objects. You manipulate objects by feeding information about them to functions. The functions do something useful with that information (calculate a mean, recode a variable, fit a model) and give you the results back.
+
+Try these out.
+```{r}
+table(my_numbers)
+```
+```{r}
+sd(my_numbers)
+```
+```{r}
+my_numbers * 5
+```
+```{r}
+my_numbers + 1
+```
+```{r}
+my_numbers + my_numbers
+```
+
+The first two functions here gave us a simple table of counts and calculated the standard deviation of `my_numbers`. 
+
+It’s worth noticing what R did in the last three cases. First we multiplied `my_numbers` by two. R interprets that as you asking it to take each element of my_numbers one at a time and multiply it by five. It does the same with the instruction `my_numbers + 1`. The single value is “recycled” down the length of the vector. 
+
+By contrast, in the last case we add `my_numbers` to itself. Because the two objects being added are the same length, R adds each element in the first vector to the corresponding element in the second vector.
+
+## Your turn
+
+Use code to compute the coefficient of variation (standard deviation divided by the mean) for your numbers.
