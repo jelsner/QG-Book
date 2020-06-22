@@ -1,0 +1,28 @@
+---
+title: "Assignment 2"
+author: "Your Full Name"
+date: "September 4, 2020"
+output: html_document
+---
+
+Due Date: September 4, 2020 (5pm)
+
+Total Points: 25
+
+**1** (5) Use the `library()` function to make the functions in the **ggplot2** package available to this session. Remember to use the back ticks to begin and and the code chunk.
+
+**2** (5) Replace the bracketed sections (e.g., <DATA>, etc) with `mpg`, `geom_boxplot`, and `x = class`, `y = hwy` to make a box plot. 
+```{r}
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+```
+
+**3** (5) Run this code. Why are the points not blue? Change the code to make the points blue. HINT: Put the `color = "blue"` outside of the `aes()` function.
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+```
+
+**4** (5) Use the combine function (`c()`) to create an object with the following set of numbers: 4, 3, 2.5, 6.8, 9. Call the object `my_numbers`.
+
+**5** (5) Knit the markdown file to create a PDF.

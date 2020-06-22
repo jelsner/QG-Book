@@ -7,9 +7,9 @@ Data science is an exciting discipline that allows you to turn raw data into und
 
 ## Today
 
-- Start to develop an understanding of what data science is
+- Learn what data science is
 - Understand course goals, structure, and expectations
-- Create and modify a data visualization 
+- Get started with RStudio Cloud
 
 ## What is this course?
 

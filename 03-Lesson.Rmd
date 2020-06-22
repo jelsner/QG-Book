@@ -13,14 +13,14 @@ What do you think: Do cars with big engines use more fuel than cars with small e
 * A: Cars with bigger engines use more fuel.
 * B: Cars with bigger engines use less fuel.
 
-You can test your answer with two things: the `mpg` data that comes in **ggplot2** and a plot. The `mpg` object contains observations collected on 38 models of cars by the US Environmental Protection Agency. Among the variables in `mpg` are:
+You can test your answer with two things: the `mpg` data that comes in {ggplot2} and a plot. The `mpg` object contains observations collected on 38 models of cars by the US Environmental Protection Agency. Among the variables in `mpg` are:
 
 * `displ`, a car’s engine size, in liters. Engine size.
 * `hwy`, a car’s fuel efficiency on the highway in units of miles per gallon.
 
 A car with a low fuel efficiency consumes more fuel than a car with a high fuel efficiency when they travel the same distance.
 
-To see the `mpg` data frame, type `mpg` after you loaded the **ggplot2** package using the `library()` function.
+To see the `mpg` data frame, type `mpg` after you loaded the {ggplot2} package using the `library()` function.
 ```{r}
 library(ggplot2)
 mpg
@@ -30,7 +30,7 @@ Note the syntax and the use of back ticks. To run the code click on the little g
 
 There are 11 columns (variables) and 234 rows (cars).
 
-The code below uses functions from the **ggplot2** package to plot the relationship between `displ` and `hwy`. Let’s first look at the plot and then talk about the code itself. To render the plot, click on the little green triangle in the upper right corner of the gray shaded region.
+The code below uses functions from the {ggplot2} package to plot the relationship between `displ` and `hwy`. Let’s first look at the plot and then talk about the code itself. To render the plot, click on the little green triangle in the upper right corner of the gray shaded region.
 ```{r}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy))
@@ -68,7 +68,7 @@ Where will `ggplot()` look for these mapped variables? In the data frame that we
 
 ### A graphing workflow
 
-The code above follows the common workflow for making graphs with **ggplot2**. To make a graph, you:
+The code above follows the common workflow for making graphs. To make a graph, you:
 
 1. Start the graph with `ggplot()`
 2. Add elements to the graph with a `geom_` function
@@ -206,7 +206,7 @@ The code you write will be more or less complex depending on the task you want t
 
 Packages save you from reinventing the wheel. They make it so that you do not, for example, have to figure out how to write code from scratch to draw a shape on screen, or load a data file into memory. 
 
-Packages are also what allow you to build on the efforts of others in order to do your own work. **ggplot** is a package of functions. There are many other such packages and we will make use of several throughout this course, either by loading them with the `library()` function, or “reaching in” to them and pulling a useful function from them directly.
+Packages are also what allow you to build on the efforts of others in order to do your own work. {ggplot2} is a package of functions. There are many other such packages and we will make use of several throughout this course, either by loading them with the `library()` function, or “reaching in” to them and pulling a useful function from them directly.
 
 All of the work we will do this semester will involve choosing the right function or functions, and then giving those functions the right instructions through a series of named arguments. Most of the mistakes you will make, and the errors you will fix, will involve having not picked the right function, or having not fed the function the right arguments, or having failed to provide information in a form the function can understand.
 
