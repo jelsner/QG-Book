@@ -1,4 +1,4 @@
-# Lesson
+# Lesson 3
 
 Last week: Learned how to use RStudio Cloud, how this course is organized, and how I will grade you. You turned in Assignment 1. I graded it then 'moved' it to Your Workspace.
 

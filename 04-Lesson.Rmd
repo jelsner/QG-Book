@@ -1,4 +1,4 @@
-# Lesson
+# Lesson 4
 
 Today: (1) Using `ggplot()` to make scatterplots. (2) Some R basics.
 

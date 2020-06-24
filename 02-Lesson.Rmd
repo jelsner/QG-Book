@@ -1,4 +1,4 @@
-# Lesson
+# Lesson 2
 
 Review: Quantitative Geography Using R: Spatial data science for geographers. No quizzes or exams. Weekly assignments are due at 5p on Friday (your weekends are free)
 
