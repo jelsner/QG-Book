@@ -1,4 +1,4 @@
-# Lesson
+# Lesson 5
 
 ## Structured data
 
@@ -140,7 +140,7 @@ For example, the data set *US.txt* on Canvas contains a list of tropical cyclone
 If our data file has column names (header record) then use the `header = TRUE` argument.
 
 Make sure the text file *US.txt* is in your working directory and type
-```{r}
+```{r, eval=FALSE}
 H <- read.table(file = "US.txt", 
                 header = TRUE)
 ```
