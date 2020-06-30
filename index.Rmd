@@ -13,8 +13,11 @@ documentclass: book
 # Preface {-}
 
 For QG next Fall: 
+
+Data Science R Basic Course: https://www.youtube.com/playlist?list=PLRJdqdXieSHM4RoA0gb0DDYsE8hXdamxm
 https://rstudio.cloud/learn/primers
 https://apoorvasrinivasanblog.com/post/hypothesis-testing/
+https://drmowinckels.io/blog/2020-06-24-the-linear-regression-family-in-r/
 https://data.library.virginia.edu/getting-started-with-quantile-regression/
 https://easystats.github.io/performance/index.html
 https://www.tidyverse.org/blog/2020/03/ggplot2-3-3-0/
