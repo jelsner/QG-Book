@@ -2,6 +2,7 @@
 
 ## Contact Information
 
+* Instructor Name: Professor James B. Elsner (he/him/his)
 * Instructor Location: Bellamy Building, Room 323a
 * Lesson Hours: MWF 9:05-9:55 a.m.
 * Student Hours: MWF 10-10:30 a.m.
@@ -21,23 +22,22 @@ You will describe and demonstrate the principles of data science. You will do th
 ## Materials
 
 * You will need access to the internet and either an iPad, laptop, or desktop computer. 
-* All course materials are available through RStudio Cloud (https://rstudio.cloud/spaces/12733/projects).
+* All course materials are available through RStudio Cloud (https://rstudio.cloud/spaces/12733/projects) and archived on Canvas.
 * There is no required textbook. 
 * Much of the material for the course comes from the online book: R for Data Science https://r4ds.had.co.nz/
 * Additional help is available online (e.g., https://tinystats.github.io/teacups-giraffes-and-statistics/index.html)
 
 ## Class meetings
 
-- Online: synchronous, interactive
+- Online: synchronous, interactive, asynchronous recordings available on Canvas
 - Some lectures, lots of learn-by-doing
-- Bring your laptop/iPad to class every day (especially on Fridays)
 
 ## Grades
 
-* Grades are determined solely by how well you do on regular homework/classwork assignments. 
-* There will be NO quizzes, tests, or exams. 
-* Class attendance is expected but not required. 
-* Late classwork or homework assignments will not be accepted. 
+* Grades are determined solely by how well you do on the regularly scheduled homework/classwork assignments. 
+* There are NO quizzes, tests, or exams. 
+* Synchronous attendance is expected but not required. 
+* Late classwork or homework assignments will not be accepted.
 * Cumulative numerical averages of 90 - 100 (outstanding) are guaranteed at least an A-, 80 - 89 (good) at least a B-, and 70 - 79 (satisfactory) at least a C-, however the exact ranges for letter grades will be determined after all work is complete.
 
 ## Academic honor code
@@ -69,38 +69,38 @@ This syllabus is a guide for the course and is subject to change with advanced n
 
 ## Schedule (subject to change with notice)
 
-Week | Dates                      | Topic
------|----------------------------|-------
-1    | August 26, 28, 30          | RStudio Cloud and R
-2    | September 4, 6             | Making a graph
-3    | September 9, 11, 13        | Working with R
-4    | September 16, 18, 20       | Data wrangling
-5    | September 23, 25, 27       | Exploratory data analysis
-6    | September 30, October 2, 4 | Exploratory data analysis
-7    | October 7, 9, 11           | Graphs
-8    | October 14, 16, 18         | Spatial data
-9    | October 21, 23, 25         | Maps
-10   | October 28, 30, November 1 | Maps
-11   | November 4, 6              | Spatial analysis
-12   | November 13, 15            | Spatial analysis
-13   | November 18, 20, 22        | Inference
-14   | November 25                | Inference
-15   | December 2, 4, 6           | Regression
+Week | Dates                       | Topic
+-----|-----------------------------|-------
+1    | August 24, 26, 28           | RStudio Cloud and R
+2    | August 31, September 2, 4   | Working with R
+3    | September 9, 11             | Data and data frames
+4    | September 14, 16, 18        | Data analysis
+5    | September 21, 23, 25        | Graphical analysis
+6    | September 28, 30, October 1 | Mapping
+7    | October 5, 7, 9             | Bayesian data analysis
+8    | October 12, 14, 16          | Regression
+9    | October 19, 21, 23          | Multiple regression
+10   | October 26, 28, 30          | Regression trees
+11   | November 2, 4, 6            | Spatial data
+12   | November 9, 13              | Spatial data analysis
+13   | November 16, 18, 19         | Geographic regression
+14   | November 30, December 2, 3  | Spatial autocorrelation
 
 I will cover new material on Mondays and Wednesdays. On Fridays you will work on your assignment that is due at 5p.
 
 Assignment | Due Date (no later than 5 pm)
 -----------|---------------
-1          | August 30
-2          | September 6
-3          | September 13
-4          | September 20
-5          | September 27
-6          | October 4
-7          | October 11
-8          | October 18
-9          | October 25
-10         | November 1
-11         | November 15
-12         | November 22
-13         | December 6
+1          | August 28
+2          | September 4
+3          | September 11
+4          | September 18
+5          | September 25
+6          | October 1
+7          | October 9
+8          | October 16
+9          | October 23
+10         | October 30
+11         | November 6
+12         | November 13
+13         | November 19
+14         | December 3
