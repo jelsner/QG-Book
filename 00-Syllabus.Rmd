@@ -8,16 +8,9 @@
 
 Email: <jelsner@fsu.edu>
 
-Links to my stuff:
-
-* [Canvas](https://cas.fsu.edu/cas/login)
-* [GitHub](https://github.com/jelsner/)
-* [Twitter](https://twitter.com/JBElsner)
-* [Research Website](http://myweb.fsu.edu/jelsner/_site/)
-
 ## Course description
 
-This course is an introduction to the quantitative analysis of geographic data (data analysis for geographers). All course content is hosted by RStudio Cloud. Please open an account at (https://rstudio.cloud). 
+This course is an introduction to the quantitative analysis of geographic data (data analysis for geographers). Most of the course content will be available through Canvas and through RStudio Cloud. Please open an account with RStudio Cloud at (https://rstudio.cloud). 
 
 Please use this link https://rstudio.cloud/spaces/12733/join?access_code=NuhGFcK71GlGuzoKzAUIe1lqgcMDyOIC7UnnFtNG to join the Spatial Data Analysis workspace on RStudio Cloud.
 
@@ -41,8 +34,8 @@ You will describe and demonstrate the principles of data science. You will do th
 
 ## Grades
 
-* Grades are solely determined by how well you do on regular homework/classwork assignments. 
-* There are NO quizzes, tests, or exams. 
+* Grades are determined solely by how well you do on regular homework/classwork assignments. 
+* There will be NO quizzes, tests, or exams. 
 * Class attendance is expected but not required. 
 * Late classwork or homework assignments will not be accepted. 
 * Cumulative numerical averages of 90 - 100 (outstanding) are guaranteed at least an A-, 80 - 89 (good) at least a B-, and 70 - 79 (satisfactory) at least a C-, however the exact ranges for letter grades will be determined after all work is complete.
@@ -63,6 +56,13 @@ Students from all diverse backgrounds and perspectives will be well-served by th
 - If you feel your performance is being impacted by your experiences outside of class, please don't hesitate to come and talk with me. If you prefer to speak with someone outside of the course, your academic dean is an excellent resource. 
 - I (like many people) am still in the process of learning about diverse perspectives/identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it.
 
+Links to my stuff:
+
+* [Canvas](https://cas.fsu.edu/cas/login)
+* [GitHub](https://github.com/jelsner/)
+* [Twitter](https://twitter.com/JBElsner)
+* [Research Website](http://myweb.fsu.edu/jelsner/_site/)
+
 ## Syllabus change policy
 
 This syllabus is a guide for the course and is subject to change with advanced notice.
@@ -71,17 +71,17 @@ This syllabus is a guide for the course and is subject to change with advanced n
 
 Week | Dates                      | Topic
 -----|----------------------------|-------
-1    | August 26, 28, 30          | RStudio cloud and R
+1    | August 26, 28, 30          | RStudio Cloud and R
 2    | September 4, 6             | Making a graph
 3    | September 9, 11, 13        | Working with R
 4    | September 16, 18, 20       | Data wrangling
 5    | September 23, 25, 27       | Exploratory data analysis
 6    | September 30, October 2, 4 | Exploratory data analysis
 7    | October 7, 9, 11           | Graphs
-8    | October 14, 16, 18         | Spatial data & Maps
+8    | October 14, 16, 18         | Spatial data
 9    | October 21, 23, 25         | Maps
 10   | October 28, 30, November 1 | Maps
-11   | November 4, 6              | NO CLASS (out of town)
+11   | November 4, 6              | Spatial analysis
 12   | November 13, 15            | Spatial analysis
 13   | November 18, 20, 22        | Inference
 14   | November 25                | Inference

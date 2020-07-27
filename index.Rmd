@@ -14,7 +14,10 @@ documentclass: book
 
 For QG next Fall: 
 
+https://evamaerey.github.io/ggplot2_grammar_guide/about
+https://livefreeordichotomize.com/2020/07/02/so-you-want-to-learn-r/
 Data Science R Basic Course: https://www.youtube.com/playlist?list=PLRJdqdXieSHM4RoA0gb0DDYsE8hXdamxm
+Data Science R Basic Course: https://kdpsingh.lab.medicine.umich.edu/lhs-610
 https://rstudio.cloud/learn/primers
 https://apoorvasrinivasanblog.com/post/hypothesis-testing/
 https://drmowinckels.io/blog/2020-06-24-the-linear-regression-family-in-r/
