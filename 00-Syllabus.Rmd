@@ -86,7 +86,7 @@ Week | Dates                       | Topic
 13   | November 16, 18, 19         | Geographic regression
 14   | November 30, December 2, 3  | Spatial autocorrelation
 
-I will cover new material on Mondays and Wednesdays. On Fridays you will work on your assignment that is due at 5p.
+I will cover new material only on Mondays and Wednesdays. On Fridays you will work on your assignment which is due at 5p.
 
 Assignment | Due Date (no later than 5 pm)
 -----------|---------------

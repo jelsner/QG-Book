@@ -1,17 +1,17 @@
 ---
 title: "Assignment 1"
 author: "Your Full Name"
-date: "August 28, 2020"
+date: "August 26, 2020"
 output: html_document
 ---
 
-Due Date: August 30, 2020 (5pm)
+Due Date: August 28, 2020 (5pm)
 
 Total Points: 20
 
 **1** (5) In this Rmd file (`01_Assignment.Rmd`), change `Your Full Name` above to your actual name.
 
-**2** (5) Type a sentence or two that describe your career goals.
+**2** (5) Type a few sentences describing what you want to do after you graduate.
 
 **3** (5) Insert code chunk delimiters (backticks and curly braces) and then, between the delimiters, type `library(ggplot2)` on one line and then `mpg` on the next line.
 

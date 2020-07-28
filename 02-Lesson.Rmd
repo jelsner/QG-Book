@@ -41,7 +41,6 @@ When you click the `knit` button at the top of an R Markdown file (like this one
 - R as a language
 - Visualize your data
 
-
 ## Data Analysis
 
 Data analysis must be done on a computer. You have two choices: use a spreadsheet or write code. 

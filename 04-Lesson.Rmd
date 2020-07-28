@@ -1,4 +1,4 @@
-# Lesson 4
+# Lesson Scatter plots
 
 Today: (1) Using `ggplot()` to make scatterplots. (2) Some R basics.
 
@@ -75,28 +75,37 @@ ggplot(airquality, mapping = aes(x = Wind, y = Ozone, label = Ozone)) +
 
 To map an aesthetic to a variable, associate the name of the aesthetic to the name of the variable inside `aes()`. 
 
-For example, consider the data set `iris`.
+As another example, consider the Palmer penguin data set from https://education.rstudio.com/blog/2020/07/palmerpenguins-cran/
 ```{r}
-head(iris)
-dim(iris)
+url <- "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv"
+peng_url <- readr::read_csv(url)
+peng_url
+
+penguins <- read.csv(url)
+
+head(penguins)
 ```
 
-The data are individual iris flowers described with sepal length, width and petal length and width. 
+The data are 344 individual penguins each described by species (Adelie, Chinstrap, Gentoo), where it was found (island name), length of bill (mm), depth of bill (mm), body mass (g), male or female, and year.
 
-There are 150 flowers. Each flower belongs to one of three species.
+Each penguin belongs to one of three species.
 ```{r}
-table(iris$Species)
+table(penguins$species)
 ```
 
-There are 50 setosa irises, 50 versicolor irises, and 50 virginica irises.
+There are 152 Adelie, 68 Chinstrap, and 124 Gentoo penguins.
 
-We can plot the relationship between sepal length and width for different species.
+We can plot the relationship between flipper length and body mass for each of the three species.
 ```{r}
-ggplot(iris, mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + 
-  geom_point()
+ggplot(data = penguins, 
+       mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species, shape = species)) + 
+  geom_point() +
+  scale_color_manual(values = c("darkorange","darkorchid","cyan4")) 
 ```
 
-The code assigns a level of the aesthetic (here a color) to each unique value of the variable, a process known as scaling. The `ggplot()` function will also add a legend that explains which levels correspond to which values.
+Penguin flipper length and body mass show a positive association for each of the 3 species:
+
+The code assigns a level of the aesthetic (here a color) to each unique value of the variable, a process known as scaling. The `ggplot()` function also adds a legend that explains which levels correspond to which values.
 
 Returning to the `mpg` data set.
 ```{r}
@@ -172,9 +181,11 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
   geom_smooth(data = filter(mpg, class == "subcompact"), se = FALSE)
 ```
 
-The function `filter()` from the {dplyr} package selects only the subcompact cars. More on this next week.
+The function `filter()` from the {dplyr} package selects only the subcompact cars. More on graphs later.
 
 ## Calculations
+
+Let's see how we can do some arithmetic in R.
 
 R evaluates commands typed at the prompt and returns the result to the screen. The prompt is the blue greater than symbol (`>`). To find the sum of the square root of 25 and 2, at the prompt type
 ```{r}
