@@ -275,6 +275,16 @@ ggplot(FLp, aes(x = Year, y = Jan)) +
   ylab("January Precipitation in Florida (in)")
 ```
 
+## Example: Food consumption and CO2 emissions
+
+Source: https://www.nu3.de/blogs/nutrition/food-carbon-footprint-index-2018
+```{r}
+food_consumption <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv')
+head(food_consumption)
+dim(food_consumption)
+```
+
+
 ## Central tendency
 
 The sample mean is a measure of the central tendency of a set of values. Typically there are more values near the mean. Similar with the median but it is more resistant to outliers. 
@@ -420,7 +430,7 @@ Ice.df[10, ]
 Ice.df$Year[which.min(Ice.df$Volume)]
 ```
 
-To coerce an object to a data frame use the function `as.data.frame()`. For example, let counts be a vector of integers.
+To change an object to a data frame use the function `as.data.frame()`. For example, let counts be a vector of integers.
 ```{r}
 counts <- rpois(100, lambda = 1.66)
 head(counts)
@@ -434,3 +444,6 @@ Similarly for the ice volume data you can use the function `cbind()` within the 
 ```{r}
 as.data.frame(cbind(Year, Volume))
 ```
+
+## More data
+https://bradlindblad.github.io/schrute/index.html

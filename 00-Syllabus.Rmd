@@ -1,6 +1,6 @@
 # Syllabus {-}
 
-## Contact Information
+## Contact information
 
 * Instructor Name: Professor James B. Elsner (he/him/his)
 * Instructor Location: Bellamy Building, Room 323a
@@ -48,7 +48,7 @@ http://www.eng.fsu.edu/~peterson/fsuhc.html
 
 Students needing academic accommodation should: (1) register with and provide documentation to the Student Disability Resource Center (https://dos.fsu.edu/sdrc/); (2) bring a letter to me indicating the need for accommodation and what type. This should be done sometime during the first week of classes.
 
-## Diversity & Inclusiveness
+## Diversity & inclusiveness
 
 Students from all diverse backgrounds and perspectives will be well-served by this course. Student learning needs be addressed both in and out of class, and that the diversity that you bring to this class will be viewed as a resource, strength and benefit. It is my intent to present materials and activities that are respectful of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture. Let me know ways to improve the effectiveness of the course for you personally, or for other students or student groups.
 
@@ -56,7 +56,7 @@ Students from all diverse backgrounds and perspectives will be well-served by th
 - If you feel your performance is being impacted by your experiences outside of class, please don't hesitate to come and talk with me. If you prefer to speak with someone outside of the course, your academic dean is an excellent resource. 
 - I (like many people) am still in the process of learning about diverse perspectives/identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it.
 
-Links to my stuff:
+## More about your instructor
 
 * [Canvas](https://cas.fsu.edu/cas/login)
 * [GitHub](https://github.com/jelsner/)
@@ -86,7 +86,7 @@ Week | Dates                       | Topic
 13   | November 16, 18, 19         | Geographic regression
 14   | November 30, December 2, 3  | Spatial autocorrelation
 
-I will cover new material only on Mondays and Wednesdays. On Fridays you will work on your assignment which is due at 5p.
+I will cover new material on Mondays and Wednesdays. On Fridays you will work on your assignment. Assignments are due Fridays at 5p.
 
 Assignment | Due Date (no later than 5 pm)
 -----------|---------------

@@ -26,6 +26,9 @@ https://easystats.github.io/performance/index.html
 https://www.tidyverse.org/blog/2020/03/ggplot2-3-3-0/
 https://cedricscherer.netlify.app/2019/05/17/the-evolution-of-a-ggplot-ep.-1/
 
+Datasets:
+https://github.com/rfordatascience/tidytuesday
+
 Climate datasets in R: 
 https://cran.r-project.org/web/packages/climate/vignettes/getstarted.html
 SOI data: http://www.bom.gov.au/climate/current/soihtm1.shtml
