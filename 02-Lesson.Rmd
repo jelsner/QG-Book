@@ -8,32 +8,12 @@ Come prepared to work on your computer, laptop, or iPad. Monday and Wednesday I 
 * Late classwork or homework assignments will not be accepted. 
 * Cumulative numerical averages of 90 - 100 (outstanding) are guaranteed at least an A-, 80 - 89 (good) at least a B-, and 70 - 79 (satisfactory) at least a C-, however the exact ranges for letter grades will be determined after all work is complete.
 * Class attendance is expected but not required.
-
 * Much of the material for the course is in the online book: R for Data Science https://r4ds.had.co.nz/
 * Help is available with material comes in https://tinystats.github.io/teacups-giraffes-and-statistics/index.html
+* Datasets https://kieranhealy.org/blog/archives/2020/08/25/some-data-packages/
 
-## Navigating RStudio Cloud
-
-![RStudio Cloud's landing page](figures/RStudioCloudLanding.png)
-
-Do this now:
-
-- Login to RStudio Cloud. 
-- Use the sandwich menu to see `Your Workspace` and `Spatial Data Analysis`. Select `Spatial Data Analysis`. This is the course workspace. 
-- Click on the project `02_Lesson`. This creates a Temporary Project. Or you can click on the `+ Copy` button.
-- Change the `author` on line 3 to your name (in quotes).
-- Use the `Knit` button to create an HTML document.
-- On the scroll down menu next to the `Knit` button, create a PDF or Word document.
-
-Do this later:
-
-- Repeat for the projects `00_Syllabus` and `01_Lesson`.
-
-When you click the `knit` button at the top of an R Markdown file (like this one), R Markdown generates a polished copy of your report. R Markdown:
-
-1. Transforms all of your text into actual formatted text (e.g. bold text, italic text, etc.)
-2. Reruns all of your code chunks in a clean R session and appends the results to the finished report.
-3. Saves the finished report alongside your .Rmd file
+Links to many free R books.
+https://www.bigbookofr.com/index.html
 
 ## Today
 
@@ -180,7 +160,7 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy))
 ```
 
-The first function, `ggplot()`, creates a coordinate system that you can add layers to. The first argument of `ggplot()` is the dataset to use in the graph.
+The first function, `ggplot()`, creates a coordinate system that you can add layers to. The first argument of `ggplot()` is the dataset to use https://twitter.com/HanaaTameez/status/1298256278876127234/photo/4e in the graph.
 
 By itself, `ggplot(data = mpg)` creates an empty graph, but it is not very interesting so I'm not going to show it here.
 

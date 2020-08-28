@@ -5,7 +5,7 @@ date: "August 26, 2020"
 output: html_document
 ---
 
-Due Date: August 28, 2020 (5pm)
+Due Date: August 28, 2020 (3pm)
 
 Total Points: 20
 
