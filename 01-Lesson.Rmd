@@ -1,15 +1,14 @@
-# Lesson 1
+# Lesson 1 
 
-* Is it getting hotter in Tallahassee? Get ready for more sweaty.
+* Is it getting hotter in Tallahassee?
 * Are hurricanes getting stronger?
 
-Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge. You will learn to do this in a `tidy` way -- more on that later!
+Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge.
 
 ## Today
 
-- Learn what data science is
-- Understand course goals, structure, and expectations
-- Get started with RStudio Cloud
+- Understand what this course is about, how it is structured, and my expectations for you
+- Start working with RStudio Cloud
 
 ## What is this course?
 
@@ -40,33 +39,33 @@ A - We can discuss that over coffee (Zoom only).
 ### Join RStudio Cloud
 
 * Go to [RStudio Cloud](https://rstudio.cloud), and log in.
-* Click on this link https://rstudio.cloud/spaces/12733/join?access_code=NuhGFcK71GlGuzoKzAUIe1lqgcMDyOIC7UnnFtNG to join the Quantitative Geography Using R workspace on RStudio Cloud.
-* Once done, raise your hand.
+* Click on this link https://rstudio.cloud/spaces/75344/join?access_code=drxxMUzCFzMd2hUzGi5EZZaR9CgXY2jJVC6mz54L to join the Quantitative Geography Using R Space on RStudio Cloud.
 
 ### Examples
 
-My research:
+Some of my recent research:
 
 - [More hots](https://eartharxiv.org/q4y8z/)
 - [Stronger tornadoes](https://eartharxiv.org/wpkt9/)
 
-Others:
+Other research:
 
 - [A year as told by fitbit](http://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/) by Nick Strayer
 - [R-Ladies global tour](http://www.masalmon.eu/2017/10/06/globalrladiestour/) by Maelle Salmon
 
+### Course Syllabus
+
+- Log on to RStudio Cloud and click on this course's Space (Quantitative Geography Using R).
+- Click on the project `00_Syllabus` and launch it.
+- Open the `00-Syllabus.Rmd` file (lower-right panel), and then click on the "Knit" button.
+- Review
+
 ### Tallahassee Daily Temperatures
 
-- Log on to RStudio Cloud and click on this course's workspace (Quantitative Geography Using R).
-- Make a copy of the project `01_Lesson` and launch it.
-- In the Files pane in the bottom right corner, spot the file called `Tallahassee_Temperatures.Rmd`. Open it, and then click on the "Knit" button.
+- Click on the project `01_Lesson` and launch it. When you access a project created by someone else, RStudio Cloud automatically creates a temporary copy of the original project for you. You can play with and make edits to it, but none of your changes will be reflected in the original. 
+- To keep the changes you’ve made, just save a copy of the project for yourself by pressing the Save a Permanent Copy button.
+- In the Files pane in the bottom right corner, locate the file called `Tallahassee_Temperatures.Rmd`. Open it, and then click on the "Knit" button.
 - Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
 - Then, change the temperature from `TMAX` to `TMIN`. Make other adjustments accordingly. Knit again. Voila, your first data visualization!
-- Once done, raise your hand. If you have questions, send a chat message.
+- Any questions? Use chat or unmute.
 
-### Open the Syllabus project
-
-- Log on to RStudio Cloud and click on this course's workspace (Quantitative Geography Using R).
-- Make a copy of the project `00_Syllabus` and launch it.
-- Open the `Syllabus.Rmd` file (lower-right panel), and then click on the "Knit" button.
-- Go back to the file and change your name on top and knit again.

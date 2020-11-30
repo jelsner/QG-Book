@@ -1,0 +1,43 @@
+---
+title: "Tallahassee Temperatures"
+author: "James B. Elsner"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+Load the R packages.
+```{r}
+suppressMessages(library(dplyr))
+suppressMessages(library(lubridate))
+```
+
+Get the data.
+```{r}
+TLH.df <- read.csv(file = 'TLH_SOD1892.csv',
+                   stringsAsFactors = FALSE,
+                   header = TRUE) %>%
+      filter(STATION == 'USW00093805') %>%
+      mutate(Date = as.Date(DATE)) %>%
+      mutate(Year = year(Date), 
+             Month = month(Date), 
+             Day = day(Date),
+             doy = yday(Date)) %>%
+      select(Date, Year, Month, Day, doy, TMAX, TMIN, PRCP)
+```
+
+Summarize and plot the data.
+```{r}
+library(ggplot2)
+
+TLH.df %>%
+  group_by(TMAX) %>%
+  summarize(nH = n()) %>%
+ggplot(aes(x = TMAX, y = nH)) +
+  geom_col(col = 'white', fill = "gray70") +
+  ylab("Number of Days") +  xlab("Daily High Temperature (°F)") +
+  scale_x_continuous(breaks = seq(from = 20, to = 110, by = 10)) +
+  ggtitle(label = "Frequency of Daily High Temperatures",
+          subtitle = "Tallahassee, FL, USA (1940-2018)") +
+  theme_minimal()
+```

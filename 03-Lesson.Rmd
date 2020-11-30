@@ -1,240 +1,442 @@
 # Lesson 3
 
-Last week: Learned how to use RStudio Cloud, how this course is organized, and how I will grade you. You turned in Assignment 1. I graded it then 'moved' it to Your Workspace.
+Today: 
 
-Monday & Wednesday you will make a copy of the Lesson. You can add notes (and code) to your copy. You should change the author to Your Name. At the end of the lesson you can Knit to HTML (or Word if you prefer). Friday you will make a copy of the Assignment. You will work on the assignment and I will grade it after 5p.
+(1) More graphing examples
+(2) How R works
 
-In this lesson you will learn how to make a graph. In doing so you will learn a bit about how R works. Assignment 2 due this Friday will ask you to make a graph.
+If your analysis is to be a convincing, the trail from data to final output must be open and available to all. Markdown helps you create scientific reports that are a mixture of text and code. This makes it easy to create an understandable trail from hypothesis, to data, to analysis, to results. Reproducible research.
 
-## Your first graph
+## Scatter plots
 
-What do you think: Do cars with big engines use more fuel than cars with small engines?
+Functions from the {ggplot2} package are used to make graphs. We make these graphing functions available for a given session of R (every time we open RStudio) with the `library(ggplot2)` function.
 
-* A: Cars with bigger engines use more fuel.
-* B: Cars with bigger engines use less fuel.
+As an example, consider the `airquality` data frame. The data contains daily air quality measurements from a location in New York City between May and September of 1973.
 
-You can test your answer with two things: the `mpg` data that comes in {ggplot2} and a plot. The `mpg` object contains observations collected on 38 models of cars by the US Environmental Protection Agency. Among the variables in `mpg` are:
+Follow along by pressing the green arrows when we get to a code chunk.
+```{r}
+airquality
+```
 
-* `displ`, a car’s engine size, in liters. Engine size.
-* `hwy`, a car’s fuel efficiency on the highway in units of miles per gallon.
+The data contains 153 rows and 6 columns. Each row is a set of measurements across six variables on a given day.
 
-A car with a low fuel efficiency consumes more fuel than a car with a high fuel efficiency when they travel the same distance.
+Most data we will work with are like this. Each row is a set of measurements (a case) and each column is a variable.
 
-To see the `mpg` data frame, type `mpg` after you loaded the {ggplot2} package using the `library()` function.
+The columns (variables) include the measurements of ozone concentration (`Ozone`) (ppm), solar radiation (`Solar.R`) (langley), wind speed (`Wind`) (mph), temperature (`Temp`) (F), as well as `Month` and `Day`.
+
+Question: Are ozone concentrations higher on warmer days? Let's see what the data say.
+
+The scatter plot is one of the most useful statistical graphs. It describes the _relationship_ between two variables. It is made by plotting the variables in a plane defined by the values of the variables. 
+
+Using the {ggplot2} functions, we answer the question above by mapping the `Temp` variable to the x aesthetic and the `Ozone` variable to the y aesthetic.
+
+More simply we could say that we plot `Temp` on the x axis and `Ozone` on the y axis. Put we want to recognize that the axes are aesthetics (there are other aesthetics like color, size, etc).
 ```{r}
 library(ggplot2)
-mpg
+
+ggplot(data = airquality) + 
+  geom_point(mapping =  aes(x = Temp, y = Ozone))
 ```
 
-Note the syntax and the use of back ticks. To run the code click on the little green triangle in the upper right corner of the gray shaded region. A part of the data is printed in the Console below. 
+What do you see? Why the warning?
 
-There are 11 columns (variables) and 234 rows (cars).
-
-The code below uses functions from the {ggplot2} package to plot the relationship between `displ` and `hwy`. Let’s first look at the plot and then talk about the code itself. To render the plot, click on the little green triangle in the upper right corner of the gray shaded region.
+To help us better describe the relationship we add another layer. This layer is defined by `geom_smooth()` which takes the same aesthetics.
 ```{r}
-ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy))
+ggplot(data = airquality) + 
+  geom_point(mapping =  aes(x = Temp, y = Ozone)) +
+  geom_smooth(mapping =  aes(x = Temp, y = Ozone))
 ```
 
-The graph gets plotted in the lower-right panel under the Plots tab.
+The smooth line describes how the average ozone concentration varies with temperature. For lower temperatures there is not much change in ozone concentrations as temperatures increase, but for higher temperatures the increase in ozone concentrations is more pronounced.
 
-Each point on the graph represents a car. Each car has a value for `hwy` and `displ`. The value for `hwy` is plotted on the vertical axis (y axis) and the value for `displ` is plotted on the horizontal axis (x axis).
-
-The graph shows an inverse relationship between engine size (`displ`) and fuel efficiency (`hwy`). Points that have a large value of `displ` have a small value of `hwy` and vice versa.
-
-In other words, cars with big engines use more fuel. If that was your hypothesis, you were right!
-
-Now let’s take a closer look at how we made the plot.
-
-### The code
-
-Here is the code. Notice that it contains three functions: `ggplot()`, `geom_point()`, and `aes()`. You can tell they are functions because they have left and right parentheses. 
+In the above code we used the same mapping for the point layer and the smooth layer. We can simplify the code by putting the `mapping =` argument into the `ggplot()` function.
 ```{r}
-ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy))
+ggplot(data = airquality,
+       mapping =  aes(x = Temp, y = Ozone)) + 
+  geom_point() +
+  geom_smooth()
 ```
 
-The first function, `ggplot()`, creates a coordinate system that you can add layers to. The first argument (a thing that goes between the parentheses) of the `ggplot()` function is the dataset to use in the graph.
-
-By itself, `ggplot(data = mpg)` creates an empty graph, but it is not very interesting.
-
-The function `geom_point()` adds a layer of points to the empty plot created by `ggplot()`. As a result, we get a scatterplot.
-
-The function `geom_point()` takes a mapping argument, which defines which variables in your dataset are mapped to which axes in your graph. The mapping argument is always paired with the function `aes()`, which you use to gather together all of the mappings that you want to create.
-
-Here, we want to map the `displ` variable to the x axis (horizontal axis) and the `hwy` variable to the y axis (vertical axis), so we add `x = displ` and `y = hwy` inside of `aes()` (and we separate them with a comma). 
-
-Where will `ggplot()` look for these mapped variables? In the data frame that we passed to the data argument, in this case, `mpg`.
-
-### A graphing workflow
-
-The code above follows the common workflow for making graphs. To make a graph, you:
-
-1. Start the graph with `ggplot()`
-2. Add elements to the graph with a `geom_` function
-3. Select variables with the `mapping = aes()` argument
-
-### A graphing template
-
-In fact, you can turn your code into a reusable template for making graphs. To make a graph, replace the bracketed sections in the code below with a data set, a `geom_` function, or a collection of mappings.
-
-Give it a try! Replace the bracketed sections with `mpg`, `geom_boxplot`, and `x = class`, `y = hwy` to make a slightly different graph. Be sure to delete the # symbols before you run the code.
-```{r, eval=FALSE}
-# ggplot(data = <DATA>) + 
-#  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
-```
-
-### Common problems
-
-As you start to work with R code, you are likely to run into problems. Don't worry — it happens to everyone. I have been writing R code for decades, and every day I write code that doesn’t work!
-
-Start by comparing the code that you are running to the code in the examples in these notes. R is extremely picky, and a misplaced character can make all the difference. Make sure that every `(` is matched with a `)` and every `"` is paired with another `"`. Also pay attention to capitalization; R is case sensitive.
-
-### location of the `+` sign
-
-One common problem when creating **ggplot2** graphics is to put the `+` in the wrong place: it must come at the end of a line, not the start. In other words, make sure you haven’t accidentally written code like this:
-```{r, eval=FALSE}
-ggplot(data = mpg) 
-+ geom_point(mapping = aes(x = displ, y = hwy))
-```
-
-### help
-
-If you’re still stuck, try the help. You can get help about any R function by running `?function_name` in a code chunk, e.g. `?geom_point`. Don’t worry if the help doesn’t seem that helpful — instead skip down to the bottom of the help page and look for a code example that matches what you’re trying to do.
-
-If that doesn’t help, carefully read the error message that appears when you run your (non-working) code. Sometimes the answer will be buried there! But when you’re new to R, you might not yet know how to understand the error message. Another great tool is Google: try googling the error message, as it’s likely someone else has had the same problem, and has gotten help online.
-
-## Things to know about R
-
-You are getting oriented to the language itself (what happens at the console), while learning to take notes in what might seem like an odd format (chunks of code interspersed with plain-text comments), in an IDE (integrated development environment) that that has a many features designed to make your life easier in the long run, but which can be hard to decipher at the beginning. Here are some general points to bear in mind about how R is designed. They might help you get a feel for how the language works.
-
-### Everything has a name
-
-In R, everything you deal with has a name. You refer to things by their names as you examine, use, or modify them. Named entities include variables (like x, or y), data that you have loaded (like my_data), and functions that you use. (More about functions soom.) You will spend a lot of time talking about, creating, referring to, and modifying things with names. 
-
-Things are listed under the Environment tab in the upper right panel of RStudio.
-
-Some names are forbidden. These include reserved words like FALSE and TRUE, core programming words like Inf, for, else, break, function, and words for special entities like NA and NaN. (These last two are codes designating missing data and “Not a Number”, respectively.) You probably won’t use these names by accident, but it’s good do know that they are not allowed.
-
-Some names you should not use, even if they are technically permitted. These are mostly words that are already in use for objects or functions that form part of the core of R. These include the names of basic functions like `q()` or `c()`, common statistical functions like `mean()`, `range()` or `var()`, and built-in mathematical constants like `pi`.
-
-Names in R are case sensitive. The object `my_data` is not the same as the object `My_Data`. When choosing names for things, be concise, consistent, and informative. Follow the style of the tidyverse and name things in lower case, separating words with the underscore character, _, as needed. Do not use spaces when naming things, including variables in your data.
-
-### Everything is an object
-
-Some objects are part of R, some are added via packages, and some are created by you. But almost everything is some kind of object. The code you write will create, manipulate, and use named objects. 
-
-Let’s create a vector of numbers. The command `c()` is a function. It’s short for “combine” or “concatenate”. It will take a sequence of comma-separated things inside the parentheses and join them together into a vector where each element is still individually accessible.
+Question: On average is ozone concentration higher on windy days? Create a graph to help you answer this question.
 ```{r}
-c(1, 2, 3, 1, 3, 5, 25)
+ggplot(data = airquality, 
+       mapping = aes(x = Wind, y = Ozone)) + 
+  geom_point() +
+  geom_smooth()
 ```
 
-Instead of sending the result to the console, we can instead assign it to an object we create:
+What is the answer?
+
+We can use a label instead of a dot for the locations in this two-dimensional scatter plot by adding the `label` aesthetic and using `geom_text`. 
 ```{r}
-my_numbers <- c(1, 2, 3, 1, 3, 5, 25)
-your_numbers <- c(5, 31, 71, 1, 3, 21, 6)
+ggplot(data = airquality, 
+       mapping = aes(x = Wind, y = Ozone, label = Ozone)) +
+  geom_text()
 ```
 
-To see what you made, type the name of the object and hit return:
+To map an aesthetic to a variable, associate the name of the aesthetic to the name of the variable inside `aes()`.
+
+We can make the plot interactive by using the `ggplotly()` function from the {plotly} package. We simply put the above code inside this function.
 ```{r}
-my_numbers
+plotly::ggplotly(
+  ggplot(data = airquality, 
+         mapping =  aes(x = Temp, y = Ozone)) + 
+  geom_point() +
+  geom_smooth()
+)
 ```
 
-Each of our numbers is still there, and can be accessed directly if we want. They are now just part of a new object, a vector, called `my_numbers`.
+Hover/zoom etc.
 
-You create objects by assigning them to names. The assignment operator is `<-`. Think of assignment as the verb “gets”, reading left to right. So, the bit of code above is read as “The object `my_numbers` gets the result of concatenating the following numbers: 1, 2, ...” 
+As another example, consider the Palmer penguin data set from https://education.rstudio.com/blog/2020/07/palmerpenguins-cran/. 
 
-The operator is two separate keys on your keyboard: the `<` key and the `-` (minus) key. When you create objects by assigning things to names, they come into existence in R’s workspace or environment.
-
-### You do things using functions
-
-You do almost everything in R using functions. Think of a function as a special kind of object that can perform actions for you. It produces output based on the input that it receives. Like a good dog, when we want a function to do something for us, we call it. Somewhat less like a dog, it will reliably do what we tell it. 
-
-We give the function some information, it acts on that information, and some results come out the other side. Functions can be recognized by the parentheses at the end of their names. This distinguishes them from other objects, such as single numbers, named vectors, tables of data, and so on.
-
-The parentheses are what allow you to send information to the function. Most functions accept one or more named arguments. A function’s arguments are the things it needs to know in order to do something. They can be some bit of your data (`data = my_numbers`), or specific instructions (`title = "GDP per Capita"`), or an option you want to choose (`smoothing = "splines", show = FALSE`). 
-
-For example, the object `my_numbers` is a numeric vector:
+The data are located on the web at the following URL. We first save the location as an object called `loc`.
 ```{r}
-my_numbers
+loc <- "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv"
 ```
 
-But the thing we used to create it, `c()`, is a function. It combines the items into a vector composed of the series of comma-separated elements you give it. Similarly, `mean()` is a function that calculates a simple average for a vector of numbers. What happens if we just type `mean()` without any arguments inside the parentheses?
-```{r, eval=FALSE}
-mean()
-```
+Note that this object is now located in our environment. It is simply a string of characters (letters, backslashes, etc) in quotes. A character object.
 
-The error message is terse but informative. The function needs an argument to work, and we haven’t given it one. In this case, ‘x’, the name of another object that `mean()` can perform its calculation on:
+Next we get the data and save it as an object called `penguins` with the `read.csv()` function. Inside the parentheses of the function we put the name of the location. 
 ```{r}
-mean(x = my_numbers)
+penguins <- read.csv(loc)
 ```
-Or
+
+We note that the object `penguins` is now in our environment. It is a data frame containing 344 rows (observations) and 8 variables. We list the first 10 rows and 7 columns by typing the name of the object as follows.
 ```{r}
-mean(x = your_numbers)
+penguins
 ```
 
-While the function arguments have names that are used internally, (here, `x =`), you don’t strictly need to specify the name for the function to work:
+The data are 344 individual penguins each described by species (Adelie, Chinstrap, Gentoo), where it was found (island name), length of bill (mm), depth of bill (mm), body mass (g), male or female, and year.
+
+Each penguin belongs to one of three species. To see how many of the 344 penguins are in each species we use the `table()` function. Between the parentheses of this function we put the name of the data `penguins` followed by the `$` sign followed by the name of the column `species`.
 ```{r}
-mean(my_numbers)
+table(penguins$species)
 ```
 
-If you omit the name of the argument, R will just assume you are giving the function what it needs, and in some order. The documentation for a function will tell you what the order of required arguments is for any particular function.
+Said another way, we reference columns in the data with the `$` sign so that `penguins$species` is how we refer to the column `species` in the data object named `penguins`.
 
-For simple functions that only require one or two arguments, omitting their names is usually not confusing. For more complex functions, you will typically want to use the names of the arguments rather than try to remember what the ordering is.
+There are 152 Adelie, 68 Chinstrap, and 124 Gentoo penguins.
 
-In general, when providing arguments to a function the syntax is `<argument> = <value>`. If `<value>` is a named object that already exists in your workspace, like a vector of numbers of a table of data, then you provide it unquoted, as in `mean(my_numbers)`. If `<value>` is not an object, a number, or a logical value like TRUE, then you usually put it in quotes, e.g., `labels(x = "X Axis Label")`.
-
-Functions take inputs via their arguments, do something, and return outputs. What the output is depends on what the function does. The `c()` function takes a sequence of comma-separated elements and returns a vector consisting of those same elements. The `mean()` function takes a vector of numbers and returns a single number, their average. 
-
-Functions can return far more than single numbers. The output returned by functions can be a table of data, or a complex object such as the results of a linear model, or the instructions needed to draw a plot. They can even be other functions. For example, the `summary()` function performs a series of calculations on a vector and produces what is in effect a little table with named elements.
-
-A function’s argument names are internal to that function. Say you have created an object in your environment named `x`, for example. A function like `mean()` also has a named argument, `x`, but R will not get confused by this. It will not use your `x` object by mistake.
-
-As we have already seen with `c()` and `mean()`, you can assign the result of a function to an object:
+We plot the relationship between flipper length and body mass for each of the three species.
 ```{r}
-my_summary <- summary(my_numbers)
+ggplot(data = penguins, 
+       mapping = aes(x = flipper_length_mm, y = body_mass_g)) + 
+  geom_point()  
 ```
 
-When you do this, there’s no output to the console. R just puts the results into the new object, as you instructed. To look inside the object you can type its name and hit return:
+Penguin flipper length and body mass show a positive relationship (association). Penguins with longer flippers tend to be larger.
+
+How does this positive relationship vary by species?
+
+We answer this question with another aesthetic. We assign a level of the aesthetic (here a color) to each unique value of the variable, a process known as scaling. The `ggplot()` function also adds a legend that explains which levels correspond to which values.
+
 ```{r}
-my_summary
+ggplot(data = penguins, 
+       mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)) + 
+  geom_point() +
+  scale_color_manual(values = c("darkorange","darkorchid","cyan4")) 
 ```
 
-### Functions come in packages (libraries)
-
-The code you write will be more or less complex depending on the task you want to accomplish. Families of useful functions are bundled into packages that you can install, load into your R session, and make use of as you work. 
-
-Packages save you from reinventing the wheel. They make it so that you do not, for example, have to figure out how to write code from scratch to draw a shape on screen, or load a data file into memory. 
-
-Packages are also what allow you to build on the efforts of others in order to do your own work. {ggplot2} is a package of functions. There are many other such packages and we will make use of several throughout this course, either by loading them with the `library()` function, or “reaching in” to them and pulling a useful function from them directly.
-
-All of the work we will do this semester will involve choosing the right function or functions, and then giving those functions the right instructions through a series of named arguments. Most of the mistakes you will make, and the errors you will fix, will involve having not picked the right function, or having not fed the function the right arguments, or having failed to provide information in a form the function can understand.
-
-For now, just remember that you do things in R by creating and manipulating named objects. You manipulate objects by feeding information about them to functions. The functions do something useful with that information (calculate a mean, recode a variable, fit a model) and give you the results back.
-
-Try these out.
+Returning to the `mpg` data set from last time.
 ```{r}
-table(my_numbers)
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy, color = class)) + 
+  geom_point()
 ```
+
+The colors reveal that the unusual points (on the right side of the plot) are two-seaters. Sports cars have large engines like SUVs and pickup trucks, but small bodies like midsize and compact cars, which improves their gas mileage. In hindsight, these cars were unlikely to be hybrids since they have large engines.
+
+In the above example, we mapped `class` to the color aesthetic, but we could have mapped `class` to the shape aesthetic, which controls point shapes.
 ```{r}
-sd(my_numbers)
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy, shape = class)) + 
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE)
 ```
+
+What happened to the SUVs? The `ggplot()` function will only use six shapes at a time. By default, additional groups will go un-plotted when you use the shape aesthetic.
+
+For each aesthetic, you use `aes()` to associate the name of the aesthetic with a variable to display. The `aes()` function gathers together each of the aesthetic mappings used by a layer and passes them to the layer's mapping argument. 
+
+The syntax highlights a useful insight about `x` and `y`: the x and y locations of a point are themselves aesthetics, visual properties that you can map to variables to display information about the data. 
+
+We can also set the aesthetic properties of your geom manually. For example, we can make all of the points in our plot blue.
 ```{r}
-my_numbers * 5
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) + 
+  geom_point(color = "blue")
 ```
+
+Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an aesthetic manually, set the aesthetic by name as an argument of your geom function; i.e. it goes outside of `aes()`. You'll need to pick a level that makes sense for that aesthetic:
+
+* The name of a color as a character string (with quotes).
+* The size of a point in millimeters.
+* The shape of a point as a number, as shown below.
+
+R has 25 shapes that are identified by numbers. There are some seeming duplicates: for example, 0, 15, and 22 are all squares. The difference comes from the interaction of the `color` and `fill` aesthetics. The hollow shapes (0--14) have a border determined by `color`; the solid shapes (15--18) are filled with `color`; the filled shapes (21--24) have a border of `color` and are filled with `fill`.
+
+### Facets
+
+Another way to add additional variables which is useful for categorical variables, is to split the plot into facets (subplots that each display one subset of the data). A categorical variable is one that can take only a limited, and usually fixed, number of possible values.
+
+To facet your plot by a categorical variable, use `facet_wrap()`. The first argument of `facet_wrap()` is a formula, which you create with `~` followed by a variable name (here "formula" is the name of a data structure in R). The variable that you pass to `facet_wrap()` should only have a limited number of values (categorical). 
+
+The variable `class` in the data frame `mpg` is a character string. You can see this by typing
 ```{r}
-my_numbers + 1
+str(mpg)
 ```
+
+There are seven car classes. We put `class` in the `facet_wrap()` function. Everything is the same as before on the first two code lines but we add the `facet_wrap()` function.
 ```{r}
-my_numbers + my_numbers
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  facet_wrap(~ class, nrow = 2) 
 ```
 
-The first two functions here gave us a simple table of counts and calculated the standard deviation of `my_numbers`. 
+The plot shows separate scatter plots one for each of the seven classes. More on graphs later.
 
-It’s worth noticing what R did in the last three cases. First we multiplied `my_numbers` by two. R interprets that as you asking it to take each element of my_numbers one at a time and multiply it by five. It does the same with the instruction `my_numbers + 1`. The single value is “recycled” down the length of the vector. 
+## Calculations
 
-By contrast, in the last case we add `my_numbers` to itself. Because the two objects being added are the same length, R adds each element in the first vector to the corresponding element in the second vector.
+Let's see how we can do some arithmetic in R.
 
-## Your turn
+R evaluates commands typed at the prompt and returns the result to the screen. The prompt is the blue greater than symbol (`>`). To find the sum of the square root of 25 and 2, at the prompt type
+```{r}
+sqrt(25) + 2
+```
 
-Use code to compute the coefficient of variation (standard deviation divided by the mean) for your numbers.
+The number inside the brackets indexes the output. Here there is only one bit of output, the answer 7. The prompt that follows indicates R is ready for another command.
+```{r}
+12/3 - 5
+```
+
+How would you calculate the 5th power of 2? How would you find the product of 10.3 & -2.9? How would you find the average of 8.3 and 10.2?
+
+How about 4.5% of 12,000?
+```{r}
+.045 * 12000 
+```
+
+## Functions
+
+Many math and statistical functions are available. A function has a name followed by a pair of parentheses. Arguments are placed inside the parentheses as needed.
+
+For example,
+```{r}
+sqrt(2)
+```
+
+```{r}
+sin(pi)
+```
+
+How do you interpret this output?  Type (highlight then click Run): .0000000000000001224647
+Why not zero? What does the `e-16` mean?
+
+```{r}
+exp(1)
+log(10)
+```
+
+Many functions have arguments with default values. For example, you only need to tell the random number generator `rnorm()` how many numbers to produce. The default mean is zero. To replace the default value, specify the corresponding argument name.
+```{r}
+rnorm(10)
+rnorm(10, mean = 5)
+```
+
+## Syntax is important
+
+You get an error message when you type a function that R does not understand. For example:
+```{r eval=FALSE}
+squareroot(2)
+```
+Error: could not find function "squareroot"
+
+```{r eval=FALSE}
+sqrt 2
+```
+Error: syntax error
+
+```{r}
+sqrt(-2)
+```
+
+```{r eval=FALSE}
+sqrt(2
+```
+
+The last command shows what happens if R encounters a line that is not complete. The continuation prompt (`+`) is printed, indicating you did not finish the command.
+
+## Saving an object
+
+Use the assignment operator to save an object. You put a name on the left-hand side of the left pointing arrow (`<-`) and the value on the right. Assignments do not produce output.
+```{r}
+x <- 2 
+x + 3    
+x <- 10
+```
+
+Here you assigned `x` to be a numeric object. Assignments are made using the left-pointing arrow (less than followed by a dash) [or an equal sign.]
+
+## Object names
+
+You are free to make object names out of letters, numbers, and the dot or underline characters.  A name starts with a letter or a dot (a leading dot may not be followed by a number). But you can't use mathematical operators, such as +, -, *, and /.
+
+Some examples of names include:
+```{r}
+x <- 2
+n <- 25
+a.long.number <- 123456789
+ASmallNumber <- .001
+```
+
+Case matters. `DF` is different than `df` or `Df`.
+
+Some names are commonly used to represent certain types of data. For instance, `n` is for length; `x` or `y` are data vectors; and `i` and `j` are integers and indices.
+
+These conventions are not forced, but consistent use of them makes it easier for you (and others) to understand what you've done.
+
+## Entering data
+
+The `c()` function is useful for getting a small amount of data into R. The function combines (concatenates) items (elements). Example: consider a set of hypothetical annual land falling hurricane counts over a ten-year period.
+
+2  3  0  3  1  0  0  1  2  1
+
+To enter these into your environment, type
+```{r}
+counts <- c(2, 3, 0, 3, 1, 0, 0, 1, 2, 1)
+counts
+```
+
+Notice a few things. You assigned the values to an object called counts. The assignment operator is an equal sign (`=`). Values do not print. They are assigned to an object name. They are printed by typing the object name as we did on the second line. Finally, the values when printed are prefaced with a `[1]`. This indicates that the object is a vector and the first entry in the vector is a value of 2 (The number immediately to the right of [1]). More on this later.
+
+You can save some typing by using the arrow keys to retrieve previous commands.  Each command is stored in a history file and the up arrow key will move backwards through the history file and the down arrow forwards.  The left and right arrow keys will work as expected.
+ 
+## Applying a function
+
+Once the data are stored in an object, you use functions on them. R comes with all sorts of functions that you can apply to your counts data.
+```{r}
+sum(counts)
+length(counts)
+sum(counts)/length(counts)
+```
+
+For this example, the `sum()` function returns the total number of hurricanes making landfall. The `length()` function returns the number of years, and `sum(counts)/length(counts)` returns the average number of hurricanes per year.
+
+Other useful functions include, `sort()`, `min()`, `max()`, `range()`, `diff()`, and `cumsum()`. Try these on the landfall counts.  What does `range()` do?  What does `diff()` do?
+
+## Mean
+
+The average (or mean) value of a set of numbers ($x$'s) is defined as:
+$$
+\bar x = \frac{x_1 + x_2 + \cdots + x_n}{n}
+$$
+The function `mean()` makes this calculation on your set of counts.
+```{r}
+mean(counts)
+```
+
+## Data vectors
+
+The count data is stored as a vector. R keeps track of the order that the data were entered. First element,second element, and so on. This is good for a couple of reasons. Here the data has a natural order - year 1, year 2, etc. You don't want to mix these. You would like to be able to make changes to the data item by item instead of entering the entire data again. Also vectors are math objects making them easy to manipulate.
+
+Suppose `counts` contain the annual number of land-falling hurricanes from the first decade of a longer record. You want to keep track of counts over other decades. This could be done by the following, example.
+```{r}
+cD1 <- counts
+cD2 <- c(0, 5, 4, 2, 3, 0, 3, 3, 2, 1) 
+```
+ 
+Note that you make a copy of the first decade of counts and save the vector using a different object name.
+
+Most functions operate on each element of the data vector at the same time.
+```{r}
+cD1 + cD2
+```
+
+The first year of the first decade is added from the first year of the second decade and so on.
+
+What happens if you apply the `c()` function to these two vectors?
+```{r}
+c(cD1, cD2)
+```
+
+If you are interested in each year's count as a difference from the decade mean, you type:
+```{r}
+cD1 - mean(cD1)
+```
+
+In this case a single number (the mean of the first decade) is subtracted from each element of the vector of counts.
+
+This is an example of data recycling. R repeats values from one vector so that its length matches the other vector. Here the mean is repeated 10 times.
+
+## Variance
+
+Suppose you are interested in the variance of the set of landfall counts. The formula is given by:
+$$
+\hbox{var}(x) = \frac{(x_1 - \bar x)^2 + (x_2 - \bar x)^2 + \cdots + (x_n - \bar x)^2}{n-1}
+$$
+
+Note: The formula is given as LaTeX math code with the double dollar signs starting (and ending) the math mode. It's a bit hard to read but it translates exactly to math as you would read it in a scientific article or textbook. Look at the HTML file.
+
+Although the `var()` function will compute this for you, here you see how you could do this directly using the vectorization of functions. The key is to find the squared differences and then add up the values.
+
+The key is to find the squared differences and then add them up.
+```{r}
+x <- cD1
+xbar <- mean(x)
+x - xbar
+(x - xbar)^2
+sum((x - xbar)^2)
+n <- length(x)
+n
+sum((x - xbar)^2)/(n - 1)
+```
+
+To verify type
+```{r}
+var(x)
+```
+
+## Data vectors have a type
+
+One restriction on data vectors is that all the values have the same type. This can be numeric, as in counts, character strings, as in
+```{r}
+simpsons <- c("Homer", "Marge", "Bart", "Lisa", "Maggie")
+simpsons
+```
+
+Note that character strings are made with matching quotes, either double, ", or single, '.
+
+If you mix the type within a data vector, the data will be coerced into a common type, which is usually a character.  Arithmetic operations do not work on characters.
+
+Returning to the land falling hurricane counts.
+```{r}
+cD1 <- c(2, 3, 0, 3, 1, 0, 0, 1, 2, 1)   
+cD2 <- c(0, 5, 4, 2, 3, 0, 3, 3, 2, 1)
+```
+
+Now suppose the National Hurricane Center (NHC) reanalyzes a storm, and that the 6th year of the 2nd decade is a 1 rather than a 0 for the number of landfalls. In this case you type
+```{r}
+cD2[6] <- 1    # assign the 6 year of the decade a value of 1 landfall
+```
+
+The assignment to the 6th entry in the vector cD2 is done by referencing the 6th entry of the vector with square brackets `[]`. 
+
+It's important to keep this in mind: Parentheses `()` are used for functions and square brackets `[]` are used to extract values from vectors (and arrays, lists, etc). REPEAT: `[]` are used to extract or subset values from vectors, data frames, matrices, etc.
+
+```{r}
+cD2    #print out the values
+cD2[2]  # print the number of landfalls during year 2 of the second decade
+cD2[4]  # 4th year count
+cD2[-4]  # all but the 4th year
+cD2[c(1, 3, 5, 7, 9)]   # print the counts from the odd years
+```
+
+One way to remember how to use functions is to think of them as pets.  They don't come unless they are called by name (spelled properly). They have a mouth (parentheses) that likes to be fed (arguments), and they will complain if they are not feed properly.
+
+## Working smarter
+
+R's console keeps a history of your commands. The previous commands are accessed using the up and down arrow keys. Repeatedly pushing the up arrow will scroll backward through the history so you can reuse previous commands.
+
+Many times you wish to change only a small part of a previous command, such as when a typo is made.  With the arrow keys you can access the previous command then edit it as desired.

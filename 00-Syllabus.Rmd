@@ -82,9 +82,9 @@ Week | Dates                       | Topic
 9    | October 19, 21, 23          | Multiple regression
 10   | October 26, 28, 30          | Regression trees
 11   | November 2, 4, 6            | Spatial data
-12   | November 9, 13              | Spatial data analysis
-13   | November 16, 18, 19         | Geographic regression
-14   | November 30, December 2, 3  | Spatial autocorrelation
+12   | November 9, 13              | Spatial autocorrelation
+13   | November 16, 18, 19         | Spatial autocorrelation
+14   | November 30, December 2, 3  | Geographic regression
 
 I will cover new material on Mondays and Wednesdays. On Fridays you will work on your assignment. Assignments are due Fridays at 5p.
 
@@ -93,14 +93,11 @@ Assignment | Due Date (no later than 5 pm)
 1          | August 28
 2          | September 4
 3          | September 11
-4          | September 18
-5          | September 25
-6          | October 1
-7          | October 9
-8          | October 16
-9          | October 23
-10         | October 30
-11         | November 6
-12         | November 13
-13         | November 19
-14         | December 3
+4          | September 25
+5          | October 1
+6          | October 9
+7          | October 16
+8          | October 23
+9          | October 30
+10         | November 19
+11         | December 3
