@@ -1,0 +1,363 @@
+# Lesson 6
+
+![firstthen](https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/r_first_then.png)
+
+Today: Wrangling data 
+
+Data wrangling, sometimes called data munging, is the process of transforming data from one format into another so as to make it easier to interpret it.
+
+The {dplyr} package includes functions that wrangle data frames in a friendly and logical way. We were introduced to data frames last week. 
+
+The functions perform operations on data frames and return data frames. Operations include selecting columns, filtering rows, re-ordering rows, adding new columns, and summarizing data.
+```{r}
+library(dplyr)
+```
+
+Let's look at these using the `airquality` data frame. Recall the object `airquality` is a data frame containing New York air quality measurements from May to September 1973. (`?airquality`). 
+
+We can summarize the values in each column with the `summary()` method.
+```{r}
+summary(airquality)
+```
+
+## Pipe operator
+
+Importantly we can apply the `summary()` function using the pipe operator (`%>%`). The pipe operator is part of the {dplyr} package and when used together with the wrangling functions, it provides a easy way to make code easy to read.
+
+For example, we read the pipe as THEN. "`airquality` data frame THEN summarize".
+```{r}
+airquality %>% 
+  summary()
+```
+
+The pipe operator allows us to string together functions while keeping the code readable. We want our code to be machine readable (correct syntax) but also human readable.
+
+For example, suppose the object of interest is called `me` and suppose there is a function called `wake_up()`. I can apply the function in two ways.
+```{r, eval=FALSE}
+wake_up(me)
+me %>% 
+  wake_up()
+```
+
+The second way involves a bit more typing but it is easier for someone to read and thus it is easier to understand. This becomes clear when stringing together many functions. 
+
+For example, what happens to the result of `me` after the function `wake_up()` has been applied? How about `get_out_of_bed()` and then `get_dressed()`? I can apply these functions in two ways.
+```{r, eval=FALSE}
+get_dressed(get_out_of_bed(wake_up(me)))
+
+me %>%
+  wake_up() %>%
+  get_out_of_bed() %>%
+  get_dressed()
+```
+
+Continuing
+```{r, eval=FALSE}
+me %>%
+  wake_up() %>%
+  get_out_of_bed() %>%
+  get_dressed() %>%
+  make_coffee() %>%
+  drink_coffee() %>%
+  leave_house()
+```
+
+Which is much better in terms of 'readability' then `leave_house(drink_coffee(make_coffee(get_dressed(get_out_of_bed(wake_up(me))))))`.
+
+Consider again the `FLp.df`. 
+```{r}
+loc <- "http://myweb.fsu.edu/jelsner/temp/data/FLprecip.txt"
+FLp.df <- read.table(loc, 
+                     header = TRUE,
+                     na.string = "-9.900")
+```
+
+How would we use the above readable syntax to compute the mean value of June precipitation?
+
+We ask three questions: what function, applied to what variable, from what data frame? Answers: `mean()`, `Jun`, `FLp.df`. We then write the code starting with the answer to the last question first.
+```{r}
+FLp.df %>%
+  pull(Jun)
+```
+
+The function `pull()` from the {dplyr} packages pulls out the column named `Jun` and returns a vector of the values.
+
+Then the `mean()` function takes these 118 values and computes the average.
+```{r}
+FLp.df %>%
+  pull(Jun) %>%
+  mean()
+```
+
+IMPORTANT: the next function in the sequence receives the output from the previous function as its FIRST argument so the function `mean()` has nothing inside the parentheses. 
+
+(1) Use the piping operator and compute the average wind speed in the `airquality` data frame.
+```{r}
+airquality %>%
+  pull(Wind) %>%
+  mean()
+```
+
+(2) Use the piping operator and compute the 10th and 90th percentiles (lower and upper decile values) of May precipitation in Florida.
+```{r}
+FLp.df %>%
+  pull(May) %>%
+  quantile(probs = c(.1, .9))
+```
+
+## Wrangling data frames
+
+We will wrangle our data with functions from the {dplyr} package. The functions work on data frames but they work better if the data frame is a _tibble_. Tibbles are data frames that make life a little easier. 
+
+R is an old language, and some things that were useful 10 or 20 years ago now get in the way. To make a data frame a tibble (tabular data frame) type
+```{r}
+airquality <- as_tibble(airquality)
+class(airquality)
+```
+
+Click on `airquality` in the environment. It is a data frame. We will use the term tibble and data frame interchangeably.
+
+### Selecting and filtering
+
+The function `select()` chooses variables by name to create a data frame with fewer columns. For example, choose the month, day, and temperature columns from the `airquality` data frame.
+```{r}
+airquality %>%
+  select(Month, Day, Temp)
+```
+
+Suppose we want a new data frame with only the temperature and ozone concentrations.
+```{r}
+df <- airquality %>%
+        select(Temp, Ozone)
+df
+```
+
+We include an assignment operator (`<-`, left pointing arrow) and an object name (here `df`).
+
+Note: The result of applying most {dplyr} verbs is a data frame. The take only data frames and return only data frames.
+
+The function `filter()` chooses observations based on specific values. 
+![filter](https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/dplyr_filter.jpg)
+
+Suppose we want only the observations where the temperature is at or above 80F.
+```{r}
+airquality %>%
+  filter(Temp >= 80)
+```
+
+The result is a data frame with the same 6 columns but now only 73 observations. Each of the observations has a temperature of at least 80F.
+
+Suppose we want a new data frame keeping only observations where temperature is at least 80F AND winds less than 5 mph.
+```{r}
+df <- airquality %>% 
+  filter(Temp >= 80 & Wind < 5)
+df
+```
+
+### Example: Palmer penguins
+
+Let's return to the penguins data set we saw in Lesson 2. The data set is located on the web, and we import it as a data frame using the `read.csv()` function.
+```{r}
+loc <- "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv"
+penguins <- read.csv(loc)
+penguins
+```
+
+To keep only the penguins labeled in the column `sex` as `female` we type
+```{r}
+penguins %>% 
+  filter(sex == "female")
+```
+  
+To filter rows keeping only species that are not Adalie penguins.
+```{r}
+penguins %>% 
+  filter(species != "Adelie")
+```
+
+When the column of interest is a numerical, we can filter rows by using greater than condition. For example, to create a data frame containing the heaviest penguins we filter keeping only rows with body mass greater than 6000 g.
+```{r}
+penguins %>% 
+  filter(body_mass_g > 6000)
+```
+  
+Similarly, we can also filter rows of a data frame with less than condition. For example, to create a data frame containing only penguins with short flippers we filter keeping only rows with flipper length less than 175 mm.
+```{r}
+penguins %>% 
+  filter(flipper_length_mm < 175)
+```
+  
+We can also specify more than one conditions. For example to create a data frame with female penguins that have larger flippers we filter keeping only rows with flipper length greater than 220 mm and with sex equal to female.
+```{r}
+penguins %>% 
+  filter(flipper_length_mm > 220 & 
+         sex == "female")
+```
+
+We can also filter a data frame for rows satisfying one of the two conditions using OR. For example to create a data frame with penguins have large flippers or short bills we filter keeping rows with flipper length of at least 220 mm or with bill depth less than 10 mm.
+```{r}
+penguins %>% 
+  filter(flipper_length_mm > 220 | 
+         bill_depth_mm < 10)
+```
+  
+Often we want to remove rows if one of the columns has a missing value. With `is.na()` on the column of interest, we can filter rows based on whether or not a column value is missing.
+
+Note the `is.na()` function returns a vector of TRUEs and FALSEs
+```{r}
+is.na(airquality$Ozone)
+```
+The first four rows of the vector `Ozone` in the `airquality` data frame are not missing so the function `is.na()` returns four `FALSE`s. 
+
+When we combine that with the `filter()` function we get a data frame containing all the rows where `is.na()` returns a `TRUE`. For example, create a data frame containing rows where the bill length value is missing.
+```{r}
+penguins %>% 
+ filter(is.na(bill_length_mm))
+```
+ 
+Usually we will want to do the reverse of this. That is keep all the rows where the column value is not missing. In this case we use negation symbol `!` to reverse the selection. In this example, we filter rows with no missing values for `sex` column.
+```{r}
+penguins %>% 
+  filter(!is.na(sex))
+```
+
+Note that this filtering will keep rows with other column values that are missing values but there will be no penguins where the `sex` value is `NA`.
+
+### Stringing functions together
+
+The function `arrange()` orders the rows by values given in a particular column.
+```{r}
+airquality %>%
+  arrange(Solar.R)
+```
+
+The ordering is from lowest value to highest value. Here we see the first 10 rows. Note `Month` and `Day` are no longer chronological.
+
+Repeat but order by the value of air temperature.
+```{r}
+airquality %>%
+  arrange(Temp)
+```
+
+Importantly we can string the functions together. For example select the variables radiation, wind, and temperature then filter by temperatures above 90F and arrange from coolest to warmest by temperature.
+```{r}
+airquality %>%
+  select(Solar.R, Wind, Temp) %>%
+  filter(Temp > 90) %>%
+  arrange(Temp)
+```
+
+The result is a data frame with three columns and 14 rows arranged by increasing temperatures above 90F. 
+
+The `mutate()` function adds new columns to the data frame. 
+![mutate](figures/dplyr_mutate.png)
+
+For example, create a new column called `TempC` as the temperature in degrees Celcius. Also create a column called `WindMS` as the wind speed in meters per second.
+```{r}
+airquality %>%
+  mutate(TempC = (Temp - 32) * 5/9,
+         WindMS = Wind * .44704) 
+```
+
+The resulting data frame has 8 columns (two new ones) labeled `TempC` and `WindMS`.
+
+On days when the temperature is below 60 F add a column giving the apparent temperature based on the cooling effect of the wind (wind chill) and then arrange from coldest to warmest apparent temperature.
+```{r}
+airquality %>%
+  filter(Temp < 60) %>%
+  mutate(TempAp = 35.74 + .6215 * Temp - 35.75 * Wind^.16 + .4275 * Temp * Wind^.16) %>%
+  arrange(TempAp)
+```
+
+### Summarize
+
+The `summarize()` function reduces (flattens) the data frame based on a function that computes a statistic. For example, to compute the average wind speed during July type
+```{r}
+airquality %>%
+  filter(Month == 7) %>%
+  summarize(Wavg = mean(Wind))
+
+airquality %>%
+  filter(Month == 6) %>%
+  summarize(Tavg = mean(Temp))
+```
+
+We've seen functions that compute statistics on vectors including `sum()`, `sd()`, `min()`, `max()`, `var()`, `range()`, `median()`. Others include
+
+Summary function  | Description
+-----------------:|:-----------
+`n()`             | Length of the column
+`first()`         | First value of the column
+`last()`          | Last value of the column
+`n_distinct()`    | Number of distinct values
+
+Find the maximum and median wind speed and maximum ozone concentration values during the month of May. Also determine the number of observations during May.
+```{r}
+airquality %>%
+  filter(Month == 5) %>%
+  summarize(Wmax = max(Wind), 
+            Wmed = median(Wind), 
+            OzoneMax = max(Ozone, na.rm = TRUE), 
+            NumDays = n())
+```
+
+Why do we get an `NA` for `OzoneMax`? 
+
+We fix this by including the argument `na.rm = TRUE` inside the `max()` function.
+```{r}
+airquality %>%
+  filter(Month == 5) %>%
+  summarize(Wmax = max(Wind),
+            Wmed = median(Wind),
+            OzoneMax = max(Ozone, na.rm = TRUE),
+            NumDays = n())
+```
+
+### Grouping
+
+If we want to summarize separately for each month we use the `group_by()` function. We split the data frame by some variable (e.g., `Month`), apply a function to the individual data frames, and then combine the output.
+
+Find the highest ozone concentration by month. Include the number of observations (days) in the month.
+```{r}
+airquality %>%
+  group_by(Month) %>%
+  summarize(OzoneMax =  max(Ozone, na.rm = TRUE),
+            NumDays = n())
+```
+
+Find the average ozone concentration when temperatures are above and below 70 F. Include the number of observations (days) in the two groups.
+```{r}
+airquality %>%
+  group_by(Temp >= 70) %>%
+  summarize(OzoneAvg =  mean(Ozone, na.rm = TRUE),
+            NumDays = n())
+```
+
+On average ozone concentration is higher on warm days (Temp >= 70 F) days. Said another way; mean ozone concentration statistically depends on temperature.
+
+The mean is a model for the data. The statistical dependency of the mean implies that a model for ozone concentration will likely be improved by including temperature as an explanatory variable.
+
+To summarize, the important verbs are
+
+Verb          | Description
+-------------:|:-----------
+`select()`    | selects columns; pick variables by their names
+`filter()`    | filters rows; pick observations by their values
+`mutate()`    | creates new columns; create new variables with functions of existing variables
+`summarize()` | summarizes values; collapse many values down to a single summary
+`group_by()`  | allows operations to be grouped
+
+The syntax of the verb functions are all the same:
+
+Properties
+* The first argument is a data frame. This argument is implicit when using the `%>%` operator.
+* The subsequent arguments describe what to do with the data frame. We refer to columns in the data frame directly (without using `$`).
+* The result is a new data frame
+
+These properties make it easy to chain together many simple lines of code to do something complex.
+
+The five functions form the basis of a grammar for data. At the most basic level, we can only alter a data frame in five useful ways: we can reorder the rows (`arrange()`), pick observations and variables of interest (`filter()` and `select()`), add new variables that are functions of existing variables (`mutate()`), or collapse many values to a summary (`summarise()`).
+
+## Your turn
+
+Consider again the Florida precipitation data set (http://myweb.fsu.edu/jelsner/temp/data/FLprecip.txt). Import the data as a data frame, select the columns `April` and `Year`, group by years > 1960, then compute the mean and variance of the April rainfall with the `summarize()` function.

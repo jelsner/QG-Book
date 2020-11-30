@@ -24,7 +24,7 @@ A spreadsheet is convenient, but they make the three conditions for a good data 
 ### Reproducibility
 
 A scientific paper is advertisement for a claim. But the _proof_ is the procedure that was used to obtain the result. 
-![SciencePaper](ScientificPaper.png)
+![SciencePaper](figures/ScientificPaper.png)
 
 If your analysis is to be convincing, the trail from the data you started with to the final output must be available to the public. A reproducible trail with a spreadsheet is hard. It is easy to make mistakes (e.g., accidentally sorting just a column rather than the entire table).
 

@@ -15,7 +15,7 @@ It is a file with the column headings `Year`, `All`, `MUS`, `G`, `FL`, `E`. Each
 
 To create a data object we use the `read.table()` function. The two arguments to this function are `file =` and `header =`. We put the name of the file in quotes. And set the header argument to `TRUE` since the first row in the file is not data.
 ```{r}
-LH.df <- read.table(file = "US.txt",
+LH.df <- read.table(file = "data/US.txt",
                     header = TRUE)
 ```
 
