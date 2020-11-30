@@ -1,0 +1,354 @@
+# Lesson 5
+
+Today: Getting data into R, data frames, quantiles, and pipes.
+
+More information about how to navigate in the RStudio IDE and with R markdown files is available here
+https://www.pipinghotdata.com/posts/2020-09-07-introducing-the-rstudio-ide-and-r-markdown/
+
+## Getting data into R
+
+We need to know two thing: (1) where the data are located, and (2) what type of data file is it.
+
+Consider the file `US.txt` located in your project folder. It is in the same folder as this file (`05-Lesson.Rmd`). Click on the file name. It opens a file tab that shows a portion of the file.
+
+It is a file with the column headings `Year`, `All`, `MUS`, `G`, `FL`, `E`. Each row is a year and the count is the number of hurricanes making landfall in the United States. `All` indicates anywhere in the continental U.S, `MUS` indicates at major hurricane intensity (at least 33 m/s). Each column is separated by a space.
+
+To create a data object we use the `read.table()` function. The two arguments to this function are `file =` and `header =`. We put the name of the file in quotes. And set the header argument to `TRUE` since the first row in the file is not data.
+```{r}
+LH.df <- read.table(file = "US.txt",
+                    header = TRUE)
+```
+
+An data object called `LH.df` is now in your Environment under Data.
+
+In this case the file name is simple because `US.txt` is in the same directory as your Rmd file.
+
+Data files for an analysis are often kept somewhere else. Here for example note the folder called `data`? Click on the folder name. To read the data from that location we would need to change file string name to `"data/US.txt"`.
+```{r}
+LH.df <- read.table(file = "data/US.txt",
+                    header = TRUE)
+```
+
+The `file =` argument is where R looks for your data. The `header =` argument tells R that the first row is not data but instead column names.
+
+If we get an error message when we run this function it is likely because the data file is not where we think it is.
+
+If our file has comma's between columns then we use the argument `sep = ","` in the function. 
+
+Note: No changes are made to your original data file.
+
+If there are missing values in the data file they should be coded as `NA`. If they are coded as something else then we specify the coding with the `na.strings =` argument. For example, if the missing value character in our file is coded as `99`, we specify `na.strings = "99"`.
+
+There are variants of `read.table()` that differ only in the default argument settings. `read.csv()` has settings that are suitable for comma delimited (csv) files that have been exported from a spreadsheet.  
+
+A typical work flow might be to export data from a spreadsheet using the csv file format then import it to R using the `read.csv()` function.
+
+We import data directly from the web by specifying the URL instead of the local file name. This requires an internet connection.
+```{r}
+loc <- "http://myweb.fsu.edu/jelsner/temp/data/US.txt"
+LH.df <- read.table(file = loc, 
+                    header = TRUE)
+```
+
+Recall that we reference the columns using the `$` syntax. For example, type
+```{r}
+LH.df$FL
+sum(LH.df$FL)
+```
+
+The number of years with 0, 1, 2, ... Florida hurricanes is obtained by typing
+```{r}
+table(LH.df$FL)
+```
+
+There are 93 years without a FL hurricane, 43 years with one hurricanes, 24 years with two hurricanes, and so on.
+
+## Data frames
+
+The functions `read.table()` and `read.csv()` import data into our environment as a data frame. For example, `LH.df` is a data frame. We see the data object is a data frame in our Environment.
+
+A data frame is like a spreadsheet. Values are arranged in rows and columns. Rows are the cases (observations) and columns are the variables. 
+
+The `dim()` function returns the size of the data frame by letting use known how many rows and how many columns.
+```{r}
+dim(LH.df)
+```
+
+There are `r nrow(LH.df)` rows and `r ncol(LH.df)` columns in the data frame.
+
+Note: Here we use inline code. Open with a single back tick (grave accent) followed by the letter r and close with a single back tick. Inline code allows content in your report to be dynamic. There is no need to retype values when the data changes. Open `05-Lesson.html` in a browser.
+
+To list the first six lines of the data object, type
+```{r}
+head(LH.df)
+```
+
+The columns include year, number of hurricanes, number of major hurricanes, number of Gulf coast hurricanes, number of Florida hurricanes, and number of East coast hurricanes in order. Column names are printed as well.  
+
+The last six lines of the data frame are listed similarly using the `tail()` function. The number of lines listed is changed using the argument `n =`.
+```{r}
+tail(LH.df, n = 3)
+```
+
+The number of years in the record is assigned to the object `nY` and the annual average number of hurricanes (rate) is assigned to the object `rate`.
+```{r}
+nY <- length(LH.df$All)
+rate <- mean(LH.df$All)
+```
+
+By typing the names of the saved objects, the values are printed.
+```{r}
+nY
+rate
+```
+
+Thus over the `r nY` years of data the average number of hurricanes per year is `r round(rate, digits = 2)`.
+
+If we want to change the names of the columns in the data frame, type
+```{r}
+names(LH.df)[4] <- "GC"
+names(LH.df)
+```
+
+This changes the 4th column name from G to GC. Note that this change occurs to the data frame in R and not to your original data file.
+
+We will work almost exclusively with data frames. A data frame has rows and columns.
+
+* Columns have names
+* Columns are vectors
+* Columns must be of the same length
+* Columns must be of the same data type
+
+Each element is indexed by a row number and a column number in that order and separated by a comma. So if `df` is a data frame then `df[2, 3]` is the second row of the third column.
+
+To print the second row of the first column of our data frame `LH.df` we type
+```{r}
+LH.df[2, 1]
+```
+
+If we want all the values in a column we leave the row number blank.
+```{r}
+LH.df[ , 1]
+```
+
+Recall we can also reference the column by name `LH.df$Year`.
+
+Data frames have two indexes indicating the rows and columns in that order.
+```{r}
+LH.df[10, 4]
+```
+
+* To a statistician a data frame is a table of observations. Each row contains one observation. Each observation must contain the same variables. These variables are called columns, and we can refer to them by name. We can also refer to the contents of the data frame by row number and column number (like a matrix).
+
+* To an Excel user a data frame is a worksheet (or a range within a worksheet). A data frame is more restrictive in that each column can only be of one data type (e.g., character, numeric, etc).
+
+As an example, consider monthly precipitation from the state of Florida. Source: Monthly climate series. http://www.esrl.noaa.gov/psd/data/timeseries/. Get monthly precipitation values for the state back to the year 1895. Copy/paste into a text editor (notepad) then import using the `read.table()` function.
+
+Here I did it for Florida and put the file on my website. Missing values are coded as -9.900 so we add the argument `na.string = "-9.900"` to the function.
+```{r}
+loc <- "http://myweb.fsu.edu/jelsner/temp/data/FLprecip.txt"
+FLp.df <- read.table(loc, 
+                     header = TRUE,
+                     na.string = "-9.900")
+```
+
+Plot a time series graph.
+```{r}
+library(ggplot2)
+
+ggplot(data = FLp.df, aes(x = Year, y = Jan)) +
+  geom_line() +
+  ylab("Inches") +
+  ggtitle(label = "January Precipitation in Florida",
+          subtitle = "1895-2012")
+```
+
+A minimal, complete, reproducible example.
+
+### Quantiles
+
+We saw in Lesson 4 that the median value cuts a set of ordered data values into two equal parts. Values larger than the median and values less than the median. The ordering comes from arranging the data from lowest to highest. 
+
+_Quantiles_ cut a set of ordered data into arbitrary number of equal-sized parts. The quantile corresponding to cutting the data into two halves is called the median. Fifty percent of the data have values less than or equal to the median value. We call the median the 50th percentile (.5 quantile).
+
+Quantiles corresponding to cutting the ordered data into quarters are called _quartiles_. The lower (first) quartile cuts the data into the lower 25% and upper 75% of the data. We call the lower quartile the .25 quantile or the 25th percentile indicating that 25% of the data have values less than this quantile value. 
+
+Correspondingly, the upper (third) quartile corresponding to the .75 quantile (75th percentile), indicates that 75% of the data have values less than this quantile value.
+
+The `quantile()` function calculates quantiles on a vector of data. For example, consider Florida precipitation for the month of June. First apply the `sort()` function on the June values (column indicated by the label Jun).
+```{r}
+sort(FLp.df$Jun)
+```
+
+Again, note the use of the dollar sign to indicate the column in the data frame.
+
+To find the 50th percentile we use the `median()` function directly or we use the `quantile()` function and specify the quantile with the `probs =` argument.
+```{r}
+median(FLp.df$Jun)
+quantile(FLp.df$Jun,
+         probs = .5)
+```
+
+To find the 25th and 75th percentile values
+```{r}
+quantile(FLp.df$Jun, 
+         probs = c(.25, .75))
+```
+
+Of the `r length(FLp.df$Jun)` monthly precipitation values, 25% of them are less than `r round(quantile(FLp.df$Jun,probs=.25),2)` inches, 50% are less than `r round(quantile(FLp.df$Jun,probs=.5),2)` inches.  
+
+Thus there are an equal number of years with June precipitation between `r round(quantile(FLp.df$Jun,probs=.25),2)` and `r round(quantile(FLp.df$Jun,probs=.5),2)` inches.
+
+The difference between the first and third quartile values is called the interquartile range (IQR). Fifty percent of the data values lie within the IQR. The IQR is obtained using the `IQR()` function.
+
+Another example: Consider the set of North Atlantic Oscillation (NAO) index values for the month of June from the period 1851--2010.  The NAO is a variation in the climate over the North Atlantic Ocean featuring fluctuations in the difference of atmospheric pressure at sea level between the Iceland and the Azores. 
+
+The index is computed as the difference in standardized sea-level pressures. The standardization is done by subtracting the mean and dividing by the standard deviation. The index has units of standard deviation.
+
+First read the data consisting of monthly NAO values, then list the column names and the first few data lines.
+```{r}
+loc <- "http://myweb.fsu.edu/jelsner/temp/data/NAO.txt"
+NAO.df <- read.table(loc, 
+                     header = TRUE)
+head(NAO.df)
+```
+
+Determine the 5th and 95th percentile values for the month of June.
+```{r}
+quantile(NAO.df$Jun, 
+         prob = c(.05, .95))
+```
+
+The `summary()` function provides summary statistics for each column in your data frame. The statistics include output the mean, median, minimum, maximum, along with the first quartile and third quartile values.
+```{r}
+summary(FLp.df)
+```
+
+Columns with missing values get a row output from the `summary()` function indicating the number of them (NA's).
+
+### Creating a data frame
+
+The `data.frame()` function creates a data frame from a set of vectors.
+
+Consider ice volume (10$^3$ km$^3$) measurements from the arctic from 2002 to 2012. The measurements are taken on January 1st each year and are available from http://psc.apl.washington.edu/wordpress/research/projects/arctic-sea-ice-volume-anomaly/data/
+
+```{r}
+Volume <- c(20.233, 19.659, 18.597, 18.948, 17.820, 
+           16.736, 16.648, 17.068, 15.916, 14.455, 
+           14.569)
+```
+
+Since the data have a sequential order we create a data frame with year in the first column and volume in the second.
+```{r}
+Year <- 2002:2012
+Ice.df <- data.frame(Year, Volume)
+head(Ice.df)
+```
+
+What year had the minimum ice volume?
+```{r}
+which.min(Ice.df$Volume)
+Ice.df[10, ]
+Ice.df$Year[which.min(Ice.df$Volume)]
+```
+
+To change a vector to a data frame use the function `as.data.frame()`. For example, let counts be a vector of integers.
+```{r}
+counts <- rpois(n = 100, 
+                lambda = 1.66)
+head(counts)
+H.df <- as.data.frame(counts)
+head(H.df)
+```
+
+The column name in the data frame is the name of the vector.
+
+### Piping operator
+
+So far we've computed statistics on data stored as vectors (mean, median, quantiles, etc). But we often import data as data frames so we need to know how to manipulate them.
+
+The {dplyr} package has functions ('verbs') that manipulate data frames in a friendly and logical way. Manipulations include, selecting columns, filtering rows, re-ordering rows, adding new columns, and summarizing data.
+```{r}
+library(dplyr)
+```
+
+Let's look at these using the `airquality` data frame. Recall the object `airquality` is a data frame containing New York air quality measurements from May to September 1973. (`?airquality`). 
+```{r}
+head(airquality)
+dim(airquality)
+```
+
+The columns include `Ozone` (ozone concentration in ppb), `Solar.R` (solar radiation in langleys), `Wind` (wind speed in mph), `Temp` (air temperature in degrees F), `Month`, and `Day`.
+
+We can summarize the values in each column with the `summary()` method.
+```{r}
+summary(airquality)
+```
+
+Note that columns that have missing values are tabulated. For example, there are 37 missing ozone measurements and 7 missing radiation measurements.
+
+Importantly we can apply the `summary()` function using the pipe operator (`%>%`). The pipe operator is part of the {dplyr} package.
+```{r}
+airquality %>% 
+  summary()
+```
+
+We read the pipe as THEN. "airquality data frame THEN summarize".
+
+The pipe operator allows us to string together a bunch of functions that makes it easy for humans to understand what was done. This is a key point. We want our code to be machine readable (correct syntax) but also human readable.
+
+For example, suppose the object of interest is called `me` and suppose there is a function called `wake_up()`. I could apply the function in two ways.
+```{r, eval=FALSE}
+wake_up(me)
+me %>% 
+  wake_up()
+```
+
+The second way involves a bit more typing but it is easier for a human to read and thus it is easier to understand. This becomes clear when stringing together many functions. 
+
+For example, what happens to the result of `me` after the function `wake_up()` has been applied? How about `get_out_of_bed()` and the `get_dressed()`? Again, I can apply these functions in two ways.
+```{r, eval=FALSE}
+get_dressed(get_out_of_bed(wake_up(me)))
+
+me %>%
+  wake_up() %>%
+  get_out_of_bed() %>%
+  get_dressed()
+```
+
+Continuing
+```{r, eval=FALSE}
+me %>%
+  wake_up() %>%
+  get_out_of_bed() %>%
+  get_dressed() %>%
+  make_coffee() %>%
+  drink_coffee() %>%
+  leave_house()
+```
+
+Which is much better in terms of 'readability' then `leave_house(drink_coffee(make_coffee(get_dressed(get_out_of_bed(wake_up(me))))))`.
+
+Consider again the `FLp.df`. How would we use the above readable syntax to compute the mean value of June precipitation?
+
+We ask three questions: what function, applied to what variable, from what data frame? Answers: `mean()`, `Jun`, `FLp.df`. We then write the code starting with the answer to the last question first.
+```{r}
+FLp.df %>%
+  pull(Jun)
+```
+
+The function `pull()` from the {dplyr} packages pulls out the column named `Jun` as a vector.
+
+Then the `mean()` function takes these 118 values and computes the average.
+```{r}
+FLp.df %>%
+  pull(Jun) %>%
+  mean()
+```
+
+Note that the next function in the sequence receives the output from the previous function as its FIRST argument so the function `mean()` has nothing inside the parentheses. 
+
+## Your turn
+
+(1) Use the piping operator and compute the average wind speed in the `airquality` data frame.
+(2) Use the piping operator and compute the 10th and 90th percentiles (lower and upper decile values) of May precipitation in Florida.
